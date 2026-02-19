@@ -1,0 +1,56 @@
+{
+  "$schema": "./golden-hashes.schema.json",
+  "version": "1.0",
+  "mcp_name": "Brazil Law MCP",
+  "jurisdiction": "BR",
+  "provisions": [
+    {
+      "id": "br-hash-001",
+      "description": "Federal Constitution of 1988 Art. 5 -- fundamental rights and guarantees including privacy (inviolability of intimacy, private life, honor, and image)",
+      "upstream_url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm",
+      "selector_hint": "Art. 5 - Dos Direitos e Deveres Individuais e Coletivos",
+      "expected_sha256": "COMPUTE_ON_FIRST_INGEST",
+      "expected_snippet": "Todos sao iguais perante a lei"
+    },
+    {
+      "id": "br-hash-002",
+      "description": "LGPD (Lei 13.709/2018) Art. 1 -- purpose and scope of Brazilian data protection law",
+      "upstream_url": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm",
+      "selector_hint": "Art. 1 - Disposicao Preliminar",
+      "expected_sha256": "COMPUTE_ON_FIRST_INGEST",
+      "expected_snippet": "dados pessoais"
+    },
+    {
+      "id": "br-hash-003",
+      "description": "Marco Civil da Internet (Lei 12.965/2014) Art. 1 -- foundations of internet regulation in Brazil",
+      "upstream_url": "https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2014/lei/l12965.htm",
+      "selector_hint": "Art. 1 - Fundamentos",
+      "expected_sha256": "COMPUTE_ON_FIRST_INGEST",
+      "expected_snippet": "uso da internet no Brasil"
+    },
+    {
+      "id": "br-hash-004",
+      "description": "Consumer Protection Code (Lei 8.078/1990) Art. 1 -- scope and application of consumer rights",
+      "upstream_url": "https://www.planalto.gov.br/ccivil_03/leis/l8078compilado.htm",
+      "selector_hint": "Art. 1 - Das Disposicoes Gerais",
+      "expected_sha256": "COMPUTE_ON_FIRST_INGEST",
+      "expected_snippet": "defesa do consumidor"
+    },
+    {
+      "id": "br-hash-005",
+      "description": "Cybercrime Law (Lei 12.737/2012) Art. 1 -- Carolina Dieckmann Law introducing computer crime provisions",
+      "upstream_url": "https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2012/lei/l12737.htm",
+      "selector_hint": "Art. 1",
+      "expected_sha256": "COMPUTE_ON_FIRST_INGEST",
+      "expected_snippet": "Codigo Penal"
+    },
+    {
+      "id": "br-hash-006",
+      "description": "Brazilian Civil Code (Lei 10.406/2002) Art. 1 -- entry into force of the Civil Code",
+      "upstream_url": "https://www.planalto.gov.br/ccivil_03/leis/2002/l10406compilada.htm",
+      "selector_hint": "Art. 1 - Das Pessoas Naturais",
+      "expected_sha256": "COMPUTE_ON_FIRST_INGEST",
+      "expected_snippet": "pessoa"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+# sources.yml
+schema_version: "1.0"
+mcp_name: "Brazil Law MCP"
+jurisdiction: "BR"
+
+sources:
+  - name: "Planalto (Presidency of the Republic - Federal Legislation)"
+    authority: "Presidency of the Republic of Brazil (Presidencia da Republica)"
+    official_portal: "https://www.planalto.gov.br/ccivil_03/"
+    canonical_identifier: "N/A (Brazilian legislation uses Law number + year as canonical identifier, e.g. Lei 13.709/2018)"
+    retrieval_method: "HTML_SCRAPE"
+    api_documentation: "N/A"
+    update_frequency: "weekly"
+    last_ingested: "PENDING_FIRST_INGEST"
+    license_or_terms:
+      type: "Brazilian Government Public Domain"
+      url: "https://www.planalto.gov.br"
+      summary: "Brazilian federal legislation is public domain; official texts published by the Presidency are freely accessible and redistributable"
+    coverage:
+      scope: "All federal laws including LGPD (Lei 13.709/2018), Marco Civil da Internet (Lei 12.965/2014), Cybercrime Law (Lei 12.737/2012), Consumer Protection Code (Lei 8.078/1990), General Telecommunications Law (Lei 9.472/1997), Brazilian Civil Code (Lei 10.406/2002), Brazilian Criminal Code, Federal Constitution of 1988"
+      limitations: "State and municipal legislation not included; historical versions may be incomplete for laws repealed before digitisation; consolidated texts may lag behind latest amendments; Portuguese language only (English translations are unofficial)"
+    languages:
+      - "pt"
+
+  - name: "LexML Brazil (Structured Legal XML)"
+    authority: "Brazilian Federal Senate (Senado Federal)"
+    official_portal: "https://www.lexml.gov.br"
+    canonical_identifier: "LexML URN (Uniform Resource Name for Brazilian legislation)"
+    retrieval_method: "XML_DOWNLOAD"
+    api_documentation: "https://www.lexml.gov.br/docs"
+    update_frequency: "weekly"
+    last_ingested: "PENDING_FIRST_INGEST"
+    license_or_terms:
+      type: "Brazilian Government Open Data"
+      url: "https://www.lexml.gov.br"
+      summary: "Federal Senate open legal data project; structured XML representations of Brazilian legislation freely available for reuse"
+    coverage:
+      scope: "Structured XML representations of federal, state, and municipal legislation; legislative process metadata; cross-references between legal instruments"
+      limitations: "Coverage of municipal legislation varies; some older instruments may not have full XML structure; primarily an index linking to authoritative sources"
+    languages:
+      - "pt"
+
+data_freshness:
+  automated_checks: true
+  check_frequency: "weekly"
+  last_verified: "PENDING_FIRST_INGEST"

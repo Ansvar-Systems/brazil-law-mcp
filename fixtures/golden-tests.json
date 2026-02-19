@@ -1,0 +1,181 @@
+{
+  "$schema": "./golden-tests.schema.json",
+  "version": "1.0",
+  "mcp_name": "Brazil Law MCP",
+  "description": "Golden contract tests for the Brazil Law MCP -- 12 tests covering article retrieval, search, citation, cross-reference, and negative cases",
+  "tests": [
+    {
+      "id": "br-001",
+      "category": "article_retrieval",
+      "description": "Retrieve LGPD Art. 1 -- purpose and scope of the Brazilian General Data Protection Law",
+      "tool": "get_provision",
+      "input": {
+        "law_identifier": "Lei 13.709/2018",
+        "article": "1"
+      },
+      "assertions": {
+        "result_not_empty": true,
+        "text_contains": ["dados pessoais"],
+        "fields_present": ["text", "article_number"],
+        "citation_url_pattern": "^https://www\\.planalto\\.gov\\.br/"
+      }
+    },
+    {
+      "id": "br-002",
+      "category": "article_retrieval",
+      "description": "Retrieve Marco Civil da Internet Art. 1 -- foundations and principles of internet use in Brazil",
+      "tool": "get_provision",
+      "input": {
+        "law_identifier": "Lei 12.965/2014",
+        "article": "1"
+      },
+      "assertions": {
+        "result_not_empty": true,
+        "any_result_contains": ["internet", "uso da internet", "direitos"],
+        "fields_present": ["text", "article_number"],
+        "text_not_empty": true
+      }
+    },
+    {
+      "id": "br-003",
+      "category": "article_retrieval",
+      "description": "Retrieve Cybercrime Law Art. 1 -- Carolina Dieckmann Law on computer crimes",
+      "tool": "get_provision",
+      "input": {
+        "law_identifier": "Lei 12.737/2012",
+        "article": "1"
+      },
+      "assertions": {
+        "result_not_empty": true,
+        "any_result_contains": ["dispositivo", "informatico", "Codigo Penal", "Penal"],
+        "fields_present": ["text"],
+        "text_not_empty": true
+      }
+    },
+    {
+      "id": "br-004",
+      "category": "search",
+      "description": "Full-text search for 'dados pessoais' (personal data) returns LGPD provisions",
+      "tool": "search_legislation",
+      "input": {
+        "query": "dados pessoais"
+      },
+      "assertions": {
+        "result_not_empty": true,
+        "min_results": 1,
+        "any_result_contains": ["LGPD", "Lei 13.709", "dados pessoais", "protecao de dados"]
+      }
+    },
+    {
+      "id": "br-005",
+      "category": "search",
+      "description": "Full-text search for 'crime cibernetico' (cybercrime) returns Criminal Code and cybercrime provisions",
+      "tool": "search_legislation",
+      "input": {
+        "query": "crime cibernetico"
+      },
+      "assertions": {
+        "result_not_empty": true,
+        "min_results": 1,
+        "any_result_contains": ["Codigo Penal", "informatico", "dispositivo", "Lei 12.737"]
+      }
+    },
+    {
+      "id": "br-006",
+      "category": "search",
+      "description": "Full-text search for 'consumidor' (consumer) returns Consumer Protection Code provisions",
+      "tool": "search_legislation",
+      "input": {
+        "query": "consumidor"
+      },
+      "assertions": {
+        "result_not_empty": true,
+        "min_results": 1,
+        "any_result_contains": ["Codigo de Defesa do Consumidor", "Lei 8.078", "consumidor", "direito do consumidor"]
+      }
+    },
+    {
+      "id": "br-007",
+      "category": "citation_roundtrip",
+      "description": "Citation for LGPD Art. 5 includes planalto.gov.br URL pattern",
+      "tool": "get_provision",
+      "input": {
+        "law_identifier": "Lei 13.709/2018",
+        "article": "5"
+      },
+      "assertions": {
+        "result_not_empty": true,
+        "citation_url_pattern": "^https://www\\.planalto\\.gov\\.br/",
+        "text_not_empty": true
+      }
+    },
+    {
+      "id": "br-008",
+      "category": "citation_roundtrip",
+      "description": "Citation for Marco Civil Art. 7 includes official URL and stable identifier",
+      "tool": "get_provision",
+      "input": {
+        "law_identifier": "Lei 12.965/2014",
+        "article": "7"
+      },
+      "assertions": {
+        "result_not_empty": true,
+        "fields_present": ["text"],
+        "citation_url_pattern": "^https://www\\.planalto\\.gov\\.br/",
+        "text_not_empty": true
+      }
+    },
+    {
+      "id": "br-009",
+      "category": "eu_cross_reference",
+      "description": "LGPD cross-reference to EU GDPR -- LGPD was modeled on GDPR with similar principles and rights",
+      "tool": "get_provision_eu_basis",
+      "input": {
+        "law_identifier": "Lei 13.709/2018"
+      },
+      "assertions": {
+        "result_not_empty": true,
+        "any_result_contains": ["GDPR", "General Data Protection Regulation", "2016/679", "EU"]
+      }
+    },
+    {
+      "id": "br-010",
+      "category": "eu_cross_reference",
+      "description": "Marco Civil da Internet cross-reference to EU ePrivacy and net neutrality frameworks",
+      "tool": "get_provision_eu_basis",
+      "input": {
+        "law_identifier": "Lei 12.965/2014"
+      },
+      "assertions": {
+        "result_not_empty": true,
+        "any_result_contains": ["net neutrality", "ePrivacy", "EU", "electronic communications", "neutralidade"]
+      }
+    },
+    {
+      "id": "br-011",
+      "category": "negative_test",
+      "description": "Non-existent Brazilian law returns graceful error or empty result",
+      "tool": "get_provision",
+      "input": {
+        "law_identifier": "Lei 99.999/2099",
+        "article": "1"
+      },
+      "assertions": {
+        "handles_gracefully": true
+      }
+    },
+    {
+      "id": "br-012",
+      "category": "negative_test",
+      "description": "Malformed article number returns graceful error or empty result",
+      "tool": "get_provision",
+      "input": {
+        "law_identifier": "Lei 13.709/2018",
+        "article": "999ZZZ-INVALID"
+      },
+      "assertions": {
+        "handles_gracefully": true
+      }
+    }
+  ]
+}
