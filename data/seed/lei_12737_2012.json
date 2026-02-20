@@ -1,0 +1,47 @@
+{
+  "id": "lei-12737-2012",
+  "type": "lei",
+  "title": "Lei de Crimes Ciberneticos (Carolina Dieckmann)",
+  "short_name": "Lei Carolina Dieckmann",
+  "status": "in_force",
+  "issued_date": "2012-11-30",
+  "url": "https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2012/lei/l12737.htm",
+  "description": "Criminalizes computer crimes in Brazil, including unauthorized access to computer systems, interruption of computer services, and falsification of electronic documents.",
+  "provisions": [
+    {
+      "provision_ref": "art1",
+      "section": "1",
+      "title": "Alteracao do Codigo Penal",
+      "content": "Esta Lei dispoe sobre a tipificacao criminal de delitos informaticos e da outras providencias. Altera o Decreto-Lei no 2.848, de 7 de dezembro de 1940 - Codigo Penal.",
+      "chapter": "Disposicoes Gerais"
+    },
+    {
+      "provision_ref": "art2",
+      "section": "2",
+      "title": "Invasao de Dispositivo Informatico (Art. 154-A CP)",
+      "content": "Invadir dispositivo informatico alheio, conectado ou nao a rede de computadores, mediante violacao indevida de mecanismo de seguranca e com o fim de obter, adulterar ou destruir dados ou informacoes sem autorizacao expressa ou tacita do titular do dispositivo ou instalar vulnerabilidades para obter vantagem ilicita. Pena - detencao, de 3 (tres) meses a 1 (um) ano, e multa. Paragraph 1 - Na mesma pena incorre quem produz, oferece, distribui, vende ou difunde dispositivo ou programa de computador com o intuito de permitir a pratica da conduta definida no caput. Paragraph 2 - Aumenta-se a pena de um sexto a um terco se da invasao resulta prejuizo economico. Paragraph 3 - Se da invasao resultar a obtencao de conteudo de comunicacoes eletronicas privadas, segredos comerciais ou industriais, informacoes sigilosas, assim definidas em lei, ou o controle remoto nao autorizado do dispositivo invadido. Pena - reclusao, de 6 (seis) meses a 2 (dois) anos, e multa. Paragraph 4 - Na hipotese do Paragraph 3, aumenta-se a pena de um a dois tercos se houver divulgacao, comercializacao ou transmissao a terceiro, a qualquer titulo, dos dados ou informacoes obtidos. Paragraph 5 - Aumenta-se a pena de um terco a metade se o crime for praticado contra: I - Presidente da Republica, governadores e prefeitos; II - Presidente do Supremo Tribunal Federal; III - Presidente da Camara dos Deputados, do Senado Federal; IV - dirigente maximo da administracao direta e indireta federal, estadual, municipal ou do Distrito Federal.",
+      "chapter": "Art. 154-A do Codigo Penal"
+    },
+    {
+      "provision_ref": "art3",
+      "section": "3",
+      "title": "Interrupcao de Servico Telematico (Art. 266 CP)",
+      "content": "Interromper servico telematico ou de informacao de utilidade publica, ou impedir ou dificultar-lhe o restabelecimento. Pena - detencao, de 1 (um) a 3 (tres) anos, e multa. Paragraph 1 - Incorre na mesma pena quem interrompe servico telematico ou de informacao de utilidade publica, ou impedir ou dificultar-lhe o restabelecimento. Paragraph 2 - Aplicam-se as penas em dobro se o crime e cometido por ocasiao de calamidade publica.",
+      "chapter": "Art. 266 do Codigo Penal"
+    },
+    {
+      "provision_ref": "art4",
+      "section": "4",
+      "title": "Falsificacao de Documento (Art. 298 CP)",
+      "content": "Falsificar, no todo ou em parte, documento particular ou alterar documento particular verdadeiro. Paragrafo unico - Para fins do disposto no caput, equipara-se a documento particular o cartao de credito ou debito.",
+      "chapter": "Art. 298 do Codigo Penal"
+    },
+    {
+      "provision_ref": "art5",
+      "section": "5",
+      "title": "Vigencia",
+      "content": "Esta Lei entra em vigor apos 120 (cento e vinte) dias de sua publicacao oficial.",
+      "chapter": "Disposicoes Finais"
+    }
+  ]
+}

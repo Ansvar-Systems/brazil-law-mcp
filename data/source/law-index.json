@@ -1,0 +1,50 @@
+[
+  {
+    "title": "Lei Geral de Protecao de Dados Pessoais (LGPD)",
+    "type": "lei",
+    "number": 13709,
+    "year": 2018,
+    "url": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm",
+    "path": "_ato2015-2018/2018/lei/l13709.htm"
+  },
+  {
+    "title": "Marco Civil da Internet",
+    "type": "lei",
+    "number": 12965,
+    "year": 2014,
+    "url": "https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2014/lei/l12965.htm",
+    "path": "_ato2011-2014/2014/lei/l12965.htm"
+  },
+  {
+    "title": "Lei de Crimes Ciberneticos (Carolina Dieckmann)",
+    "type": "lei",
+    "number": 12737,
+    "year": 2012,
+    "url": "https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2012/lei/l12737.htm",
+    "path": "_ato2011-2014/2012/lei/l12737.htm"
+  },
+  {
+    "title": "Codigo de Defesa do Consumidor",
+    "type": "lei",
+    "number": 8078,
+    "year": 1990,
+    "url": "https://www.planalto.gov.br/ccivil_03/leis/l8078compilado.htm",
+    "path": "leis/l8078compilado.htm"
+  },
+  {
+    "title": "Codigo Civil",
+    "type": "lei",
+    "number": 10406,
+    "year": 2002,
+    "url": "https://www.planalto.gov.br/ccivil_03/leis/2002/l10406compilada.htm",
+    "path": "leis/2002/l10406compilada.htm"
+  },
+  {
+    "title": "Lei Geral de Telecomunicacoes",
+    "type": "lei",
+    "number": 9472,
+    "year": 1997,
+    "url": "https://www.planalto.gov.br/ccivil_03/leis/l9472.htm",
+    "path": "leis/l9472.htm"
+  }
+]

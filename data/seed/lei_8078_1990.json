@@ -1,0 +1,82 @@
+{
+  "id": "lei-8078-1990",
+  "type": "lei",
+  "title": "Codigo de Defesa do Consumidor",
+  "short_name": "CDC",
+  "status": "in_force",
+  "issued_date": "1990-09-11",
+  "url": "https://www.planalto.gov.br/ccivil_03/leis/l8078compilado.htm",
+  "description": "The Brazilian Consumer Defense Code. Comprehensive consumer protection law establishing rights, obligations, and enforcement mechanisms for consumer relations.",
+  "provisions": [
+    {
+      "provision_ref": "art1",
+      "section": "1",
+      "title": "Normas de Protecao e Defesa do Consumidor",
+      "content": "O presente codigo estabelece normas de protecao e defesa do consumidor, de ordem publica e interesse social, nos termos dos arts. 5, inciso XXXII, 170, inciso V, da Constituicao Federal e art. 48 de suas Disposicoes Transitorias.",
+      "chapter": "TITULO I - Dos Direitos do Consumidor"
+    },
+    {
+      "provision_ref": "art2",
+      "section": "2",
+      "title": "Conceito de Consumidor",
+      "content": "Consumidor e toda pessoa fisica ou juridica que adquire ou utiliza produto ou servico como destinatario final. Paragrafo unico - Equipara-se a consumidor a coletividade de pessoas, ainda que indeterminaveis, que haja intervindo nas relacoes de consumo.",
+      "chapter": "TITULO I - Dos Direitos do Consumidor"
+    },
+    {
+      "provision_ref": "art3",
+      "section": "3",
+      "title": "Conceito de Fornecedor",
+      "content": "Fornecedor e toda pessoa fisica ou juridica, publica ou privada, nacional ou estrangeira, bem como os entes despersonalizados, que desenvolvem atividade de producao, montagem, criacao, construcao, transformacao, importacao, exportacao, distribuicao ou comercializacao de produtos ou prestacao de servicos. Paragraph 1 - Produto e qualquer bem, movel ou imovel, material ou imaterial. Paragraph 2 - Servico e qualquer atividade fornecida no mercado de consumo, mediante remuneracao, inclusive as de natureza bancaria, financeira, de credito e securitaria, salvo as decorrentes das relacoes de carater trabalhista.",
+      "chapter": "TITULO I - Dos Direitos do Consumidor"
+    },
+    {
+      "provision_ref": "art6",
+      "section": "6",
+      "title": "Direitos Basicos do Consumidor",
+      "content": "Sao direitos basicos do consumidor: I - a protecao da vida, saude e seguranca contra os riscos provocados por praticas no fornecimento de produtos e servicos considerados perigosos ou nocivos; II - a educacao e divulgacao sobre o consumo adequado dos produtos e servicos; III - a informacao adequada e clara sobre os diferentes produtos e servicos; IV - a protecao contra a publicidade enganosa e abusiva; V - a modificacao das clausulas contratuais que estabelecam prestacoes desproporcionais; VI - a efetiva prevencao e reparacao de danos patrimoniais e morais, individuais, coletivos e difusos; VII - o acesso aos orgaos judiciarios e administrativos; VIII - a facilitacao da defesa de seus direitos; IX - a adequada e eficaz prestacao dos servicos publicos em geral; X - a prevencao e o tratamento de situacoes de superendividamento.",
+      "chapter": "CAPITULO III - Dos Direitos Basicos do Consumidor"
+    },
+    {
+      "provision_ref": "art12",
+      "section": "12",
+      "title": "Responsabilidade pelo Fato do Produto",
+      "content": "O fabricante, o produtor, o construtor, nacional ou estrangeiro, e o importador respondem, independentemente da existencia de culpa, pela reparacao dos danos causados aos consumidores por defeitos decorrentes de projeto, fabricacao, construcao, montagem, formulas, manipulacao, apresentacao ou acondicionamento de seus produtos, bem como por informacoes insuficientes ou inadequadas sobre sua utilizacao e riscos.",
+      "chapter": "CAPITULO IV - Da Qualidade de Produtos e Servicos"
+    },
+    {
+      "provision_ref": "art14",
+      "section": "14",
+      "title": "Responsabilidade pelo Fato do Servico",
+      "content": "O fornecedor de servicos responde, independentemente da existencia de culpa, pela reparacao dos danos causados aos consumidores por defeitos relativos a prestacao dos servicos, bem como por informacoes insuficientes ou inadequadas sobre sua fruicao e riscos. Paragraph 1 - O servico e defeituoso quando nao fornece a seguranca que o consumidor dele pode esperar, levando-se em consideracao as circunstancias relevantes, entre as quais: I - o modo de seu fornecimento; II - o resultado e os riscos que razoavelmente dele se esperam; III - a epoca em que foi fornecido.",
+      "chapter": "CAPITULO IV - Da Qualidade de Produtos e Servicos"
+    },
+    {
+      "provision_ref": "art30",
+      "section": "30",
+      "title": "Informacao e Publicidade",
+      "content": "Toda informacao ou publicidade, suficientemente precisa, veiculada por qualquer forma ou meio de comunicacao com relacao a produtos e servicos oferecidos ou apresentados, obriga o fornecedor que a fizer veicular ou dela se utilizar e integra o contrato que vier a ser celebrado.",
+      "chapter": "CAPITULO V - Das Praticas Comerciais"
+    },
+    {
+      "provision_ref": "art43",
+      "section": "43",
+      "title": "Bancos de Dados e Cadastros de Consumidores",
+      "content": "O consumidor, sem prejuizo do disposto no art. 86, tera acesso as informacoes existentes em cadastros, fichas, registros e dados pessoais e de consumo arquivados sobre ele, bem como sobre as suas respectivas fontes. Paragraph 1 - Os cadastros e dados de consumidores devem ser objetivos, claros, verdadeiros e em linguagem de facil compreensao, nao podendo conter informacoes negativas referentes a periodo superior a cinco anos. Paragraph 2 - A abertura de cadastro, ficha, registro e dados pessoais e de consumo devera ser comunicada por escrito ao consumidor, quando nao solicitada por ele.",
+      "chapter": "CAPITULO V - Das Praticas Comerciais"
+    },
+    {
+      "provision_ref": "art51",
+      "section": "51",
+      "title": "Clausulas Abusivas",
+      "content": "Sao nulas de pleno direito, entre outras, as clausulas contratuais relativas ao fornecimento de produtos e servicos que: I - impossibilitem, exonerem ou atenuem a responsabilidade do fornecedor por vicios de qualquer natureza dos produtos e servicos; II - subtraiam ao consumidor a opcao de reembolso da quantia ja paga; III - transfiram responsabilidades a terceiros; IV - estabelecam obrigacoes consideradas iniquas, abusivas, que coloquem o consumidor em desvantagem exagerada, ou sejam incompativeis com a boa-fe ou a equidade.",
+      "chapter": "CAPITULO VI - Da Protecao Contratual"
+    },
+    {
+      "provision_ref": "art72",
+      "section": "72",
+      "title": "Banco de Dados - Sancao Penal",
+      "content": "Impedir ou dificultar o acesso do consumidor as informacoes que sobre ele constem em cadastros, banco de dados, fichas e registros. Pena: Detencao de seis meses a um ano ou multa.",
+      "chapter": "TITULO II - Das Infracoes Penais"
+    }
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "id": "lei-13709-2018",
+  "type": "lei",
+  "title": "Lei Geral de Protecao de Dados Pessoais (LGPD)",
+  "short_name": "LGPD",
+  "status": "in_force",
+  "issued_date": "2018-08-14",
+  "url": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm",
+  "description": "Brazil's General Data Protection Law, modeled on the GDPR (Regulation (EU) 2016/679). Establishes rules for the processing of personal data by public and private entities.",
+  "provisions": [
+    {
+      "provision_ref": "art1",
+      "section": "1",
+      "title": "Objetivo",
+      "content": "Esta Lei dispoe sobre o tratamento de dados pessoais, inclusive nos meios digitais, por pessoa natural ou por pessoa juridica de direito publico ou privado, com o objetivo de proteger os direitos fundamentais de liberdade e de privacidade e o livre desenvolvimento da personalidade da pessoa natural.",
+      "chapter": "CAPITULO I - Disposicoes Preliminares"
+    },
+    {
+      "provision_ref": "art2",
+      "section": "2",
+      "title": "Fundamentos",
+      "content": "A disciplina da protecao de dados pessoais tem como fundamentos: I - o respeito a privacidade; II - a autodeterminacao informativa; III - a liberdade de expressao, de informacao, de comunicacao e de opiniao; IV - a inviolabilidade da intimidade, da honra e da imagem; V - o desenvolvimento economico e tecnologico e a inovacao; VI - a livre iniciativa, a livre concorrencia e a defesa do consumidor; VII - os direitos humanos, o livre desenvolvimento da personalidade, a dignidade e o exercicio da cidadania pelas pessoas naturais.",
+      "chapter": "CAPITULO I - Disposicoes Preliminares"
+    },
+    {
+      "provision_ref": "art3",
+      "section": "3",
+      "title": "Ambito de Aplicacao",
+      "content": "Esta Lei aplica-se a qualquer operacao de tratamento realizada por pessoa natural ou por pessoa juridica de direito publico ou privado, independentemente do meio, do pais de sua sede ou do pais onde estejam localizados os dados, desde que: I - a operacao de tratamento seja realizada no territorio nacional; II - a atividade de tratamento tenha por objetivo a oferta ou o fornecimento de bens ou servicos ou o tratamento de dados de individuos localizados no territorio nacional; III - os dados pessoais objeto do tratamento tenham sido coletados no territorio nacional.",
+      "chapter": "CAPITULO I - Disposicoes Preliminares"
+    },
+    {
+      "provision_ref": "art5",
+      "section": "5",
+      "title": "Definicoes",
+      "content": "Para os fins desta Lei, considera-se: I - dado pessoal: informacao relacionada a pessoa natural identificada ou identificavel; II - dado pessoal sensivel: dado pessoal sobre origem racial ou etnica, conviccao religiosa, opiniao politica, filiacao a sindicato ou a organizacao de carater religioso, filosofico ou politico, dado referente a saude ou a vida sexual, dado genetico ou biometrico, quando vinculado a uma pessoa natural; III - dado anonimizado: dado relativo a titular que nao possa ser identificado; IV - banco de dados: conjunto estruturado de dados pessoais; V - titular: pessoa natural a quem se referem os dados pessoais; VI - controlador: pessoa natural ou juridica a quem competem as decisoes referentes ao tratamento de dados pessoais; VII - operador: pessoa natural ou juridica que realiza o tratamento de dados pessoais em nome do controlador; VIII - encarregado: pessoa indicada pelo controlador e operador para atuar como canal de comunicacao entre o controlador, os titulares dos dados e a Autoridade Nacional de Protecao de Dados (ANPD); IX - agentes de tratamento: o controlador e o operador; X - tratamento: toda operacao realizada com dados pessoais.",
+      "chapter": "CAPITULO I - Disposicoes Preliminares"
+    },
+    {
+      "provision_ref": "art6",
+      "section": "6",
+      "title": "Principios",
+      "content": "As atividades de tratamento de dados pessoais deverao observar a boa-fe e os seguintes principios: I - finalidade; II - adequacao; III - necessidade; IV - livre acesso; V - qualidade dos dados; VI - transparencia; VII - seguranca; VIII - prevencao; IX - nao discriminacao; X - responsabilizacao e prestacao de contas. These principles are modeled on Article 5 of the GDPR (Regulation (EU) 2016/679).",
+      "chapter": "CAPITULO I - Disposicoes Preliminares"
+    },
+    {
+      "provision_ref": "art7",
+      "section": "7",
+      "title": "Bases Legais para Tratamento",
+      "content": "O tratamento de dados pessoais somente podera ser realizado nas seguintes hipoteses: I - mediante o fornecimento de consentimento pelo titular; II - para o cumprimento de obrigacao legal ou regulatoria pelo controlador; III - pela administracao publica, para o tratamento e uso compartilhado de dados necessarios a execucao de politicas publicas; IV - para a realizacao de estudos por orgao de pesquisa; V - quando necessario para a execucao de contrato; VI - para o exercicio regular de direitos em processo judicial; VII - para a protecao da vida ou da incolumidade fisica do titular ou de terceiro; VIII - para a tutela da saude; IX - quando necessario para atender aos interesses legitimos do controlador ou de terceiro; X - para a protecao do credito.",
+      "chapter": "CAPITULO II - Do Tratamento de Dados Pessoais"
+    },
+    {
+      "provision_ref": "art11",
+      "section": "11",
+      "title": "Tratamento de Dados Sensiveis",
+      "content": "O tratamento de dados pessoais sensiveis somente podera ocorrer nas seguintes hipoteses: I - quando o titular ou seu responsavel legal consentir, de forma especifica e destacada, para finalidades especificas; II - sem fornecimento de consentimento do titular, nas hipoteses em que for indispensavel para: a) cumprimento de obrigacao legal; b) tratamento compartilhado de dados necessarios a execucao de politicas publicas; c) realizacao de estudos por orgao de pesquisa; d) exercicio regular de direitos; e) protecao da vida; f) tutela da saude; g) garantia da prevencao a fraude e a seguranca do titular.",
+      "chapter": "CAPITULO II - Do Tratamento de Dados Pessoais"
+    },
+    {
+      "provision_ref": "art17",
+      "section": "17",
+      "title": "Titularidade dos Dados",
+      "content": "Toda pessoa natural tem assegurada a titularidade de seus dados pessoais e garantidos os direitos fundamentais de liberdade, de intimidade e de privacidade, nos termos desta Lei.",
+      "chapter": "CAPITULO III - Dos Direitos do Titular"
+    },
+    {
+      "provision_ref": "art18",
+      "section": "18",
+      "title": "Direitos do Titular",
+      "content": "O titular dos dados pessoais tem direito a obter do controlador, em relacao aos dados do titular por ele tratados, a qualquer momento e mediante requisicao: I - confirmacao da existencia de tratamento; II - acesso aos dados; III - correcao de dados incompletos, inexatos ou desatualizados; IV - anonimizacao, bloqueio ou eliminacao de dados desnecessarios; V - portabilidade dos dados a outro fornecedor de servico ou produto; VI - eliminacao dos dados pessoais tratados com o consentimento do titular; VII - informacao das entidades publicas e privadas com as quais o controlador realizou uso compartilhado de dados; VIII - informacao sobre a possibilidade de nao fornecer consentimento e sobre as consequencias da negativa; IX - revogacao do consentimento.",
+      "chapter": "CAPITULO III - Dos Direitos do Titular"
+    },
+    {
+      "provision_ref": "art33",
+      "section": "33",
+      "title": "Transferencia Internacional",
+      "content": "A transferencia internacional de dados pessoais somente e permitida nos seguintes casos: I - para paises ou organismos internacionais que proporcionem grau de protecao de dados pessoais adequado ao previsto nesta Lei; II - quando o controlador oferecer e comprovar garantias de cumprimento dos principios e dos direitos do titular; III - quando a transferencia for necessaria para a cooperacao juridica internacional; IV - quando a autoridade nacional autorizar a transferencia; V - quando a transferencia resultar em compromisso assumido em acordo de cooperacao internacional; VI - quando a transferencia for necessaria para a protecao da vida ou da incolumidade fisica do titular ou de terceiro; VII - quando a autoridade nacional autorizar a transferencia; VIII - quando o titular tiver fornecido o seu consentimento especifico e em destaque para a transferencia; IX - quando necessario para atender as hipoteses previstas nos incisos II, V e VI do art. 7o desta Lei. Similar to Chapter V of the GDPR (Regulation (EU) 2016/679) on transfers of personal data to third countries.",
+      "chapter": "CAPITULO V - Da Transferencia Internacional de Dados"
+    },
+    {
+      "provision_ref": "art41",
+      "section": "41",
+      "title": "Encarregado pelo Tratamento de Dados Pessoais",
+      "content": "O controlador devera indicar encarregado pelo tratamento de dados pessoais. Paragraph 1 - A identidade e as informacoes de contato do encarregado deverao ser divulgadas publicamente, de forma clara e objetiva, preferencialmente no sitio eletronico do controlador. Paragraph 2 - As atividades do encarregado consistem em: I - aceitar reclamacoes e comunicacoes dos titulares; II - receber comunicacoes da autoridade nacional; III - orientar os funcionarios e os contratados da entidade a respeito das praticas a serem tomadas em relacao a protecao de dados pessoais; IV - executar as demais atribuicoes determinadas pelo controlador ou estabelecidas em normas complementares. Similar to the role of the Data Protection Officer under Article 37 of the GDPR (Regulation (EU) 2016/679).",
+      "chapter": "CAPITULO VI - Dos Agentes de Tratamento de Dados Pessoais"
+    },
+    {
+      "provision_ref": "art46",
+      "section": "46",
+      "title": "Seguranca e Sigilo de Dados",
+      "content": "Os agentes de tratamento devem adotar medidas de seguranca, tecnicas e administrativas aptas a proteger os dados pessoais de acessos nao autorizados e de situacoes acidentais ou ilicitas de destruicao, perda, alteracao, comunicacao ou qualquer forma de tratamento inadequado ou ilicito.",
+      "chapter": "CAPITULO VII - Da Seguranca e das Boas Praticas"
+    },
+    {
+      "provision_ref": "art48",
+      "section": "48",
+      "title": "Comunicacao de Incidentes de Seguranca",
+      "content": "O controlador devera comunicar a autoridade nacional e ao titular a ocorrencia de incidente de seguranca que possa acarretar risco ou dano relevante aos titulares. Paragraph 1 - A comunicacao sera feita em prazo razoavel, conforme definido pela autoridade nacional, e devera mencionar, no minimo: I - a descricao da natureza dos dados pessoais afetados; II - as informacoes sobre os titulares envolvidos; III - a indicacao das medidas tecnicas e de seguranca utilizadas; IV - os riscos relacionados ao incidente; V - os motivos da demora, no caso de a comunicacao nao ter sido imediata; VI - as medidas que foram ou que serao adotadas para reverter ou mitigar os efeitos do prejuizo.",
+      "chapter": "CAPITULO VII - Da Seguranca e das Boas Praticas"
+    },
+    {
+      "provision_ref": "art52",
+      "section": "52",
+      "title": "Sancoes Administrativas",
+      "content": "Os agentes de tratamento de dados, em razao das infracoes cometidas as normas previstas nesta Lei, ficam sujeitos as seguintes sancoes administrativas aplicaveis pela autoridade nacional: I - advertencia, com indicacao de prazo para adocao de medidas corretivas; II - multa simples, de ate 2% (dois por cento) do faturamento da pessoa juridica de direito privado, grupo ou conglomerado no Brasil no seu ultimo exercicio, excluidos os tributos, limitada, no total, a R$ 50.000.000,00 (cinquenta milhoes de reais) por infracao; III - multa diaria; IV - publicizacao da infracao; V - bloqueio dos dados pessoais; VI - eliminacao dos dados pessoais; VII - suspensao parcial do funcionamento do banco de dados; VIII - suspensao do exercicio da atividade de tratamento dos dados pessoais; IX - proibicao parcial ou total do exercicio de atividades relacionadas a tratamento de dados.",
+      "chapter": "CAPITULO VIII - Da Fiscalizacao"
+    },
+    {
+      "provision_ref": "art55a",
+      "section": "55-A",
+      "title": "Autoridade Nacional de Protecao de Dados",
+      "content": "Fica criada, sem aumento de despesa, a Autoridade Nacional de Protecao de Dados (ANPD), orgao da administracao publica federal, integrante da Presidencia da Republica. Paragraph 1 - A natureza juridica da ANPD e transitoria e podera ser transformada pelo Poder Executivo em entidade da administracao publica federal indireta, submetida a regime autarquico especial e vinculada a Presidencia da Republica. The ANPD fulfills a similar role to Data Protection Authorities under the GDPR (Regulation (EU) 2016/679).",
+      "chapter": "CAPITULO IX - Da Autoridade Nacional de Protecao de Dados (ANPD)"
+    },
+    {
+      "provision_ref": "art65",
+      "section": "65",
+      "title": "Vigencia",
+      "content": "Esta Lei entra em vigor: I - dia 28 de dezembro de 2018, quanto aos arts. 55-A, 55-B, 55-C, 55-D, 55-E, 58-A e 58-B; II - 24 (vinte e quatro) meses apos a data de sua publicacao, quanto aos demais artigos.",
+      "chapter": "CAPITULO X - Disposicoes Finais e Transitorias"
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "id": "lei-10406-2002",
+  "type": "lei",
+  "title": "Codigo Civil",
+  "short_name": "Codigo Civil",
+  "status": "in_force",
+  "issued_date": "2002-01-10",
+  "url": "https://www.planalto.gov.br/ccivil_03/leis/2002/l10406compilada.htm",
+  "description": "The Brazilian Civil Code. Governs civil law matters including persons, property, obligations, contracts, torts, business entities, and succession.",
+  "provisions": [
+    {
+      "provision_ref": "art1",
+      "section": "1",
+      "title": "Capacidade Civil",
+      "content": "Toda pessoa e capaz de direitos e deveres na ordem civil.",
+      "chapter": "PARTE GERAL - LIVRO I - Das Pessoas"
+    },
+    {
+      "provision_ref": "art2",
+      "section": "2",
+      "title": "Inicio da Personalidade Civil",
+      "content": "A personalidade civil da pessoa comeca do nascimento com vida; mas a lei poe a salvo, desde a concepcao, os direitos do nascituro.",
+      "chapter": "PARTE GERAL - LIVRO I - Das Pessoas"
+    },
+    {
+      "provision_ref": "art11",
+      "section": "11",
+      "title": "Direitos da Personalidade",
+      "content": "Com excecao dos casos previstos em lei, os direitos da personalidade sao intransmissiveis e irrenunciaveis, nao podendo o seu exercicio sofrer limitacao voluntaria.",
+      "chapter": "PARTE GERAL - LIVRO I - Capitulo II - Dos Direitos da Personalidade"
+    },
+    {
+      "provision_ref": "art12",
+      "section": "12",
+      "title": "Tutela dos Direitos da Personalidade",
+      "content": "Pode-se exigir que cesse a ameaca, ou a lesao, a direito da personalidade, e reclamar perdas e danos, sem prejuizo de outras sancoes previstas em lei. Paragrafo unico - Em se tratando de morto, tera legitimacao para requerer a medida prevista neste artigo o conjuge sobrevivente, ou qualquer parente em linha reta, ou colateral ate o quarto grau.",
+      "chapter": "PARTE GERAL - LIVRO I - Capitulo II - Dos Direitos da Personalidade"
+    },
+    {
+      "provision_ref": "art21",
+      "section": "21",
+      "title": "Vida Privada",
+      "content": "A vida privada da pessoa natural e inviolavel, e o juiz, a requerimento do interessado, adotara as providencias necessarias para impedir ou fazer cessar ato contrario a esta norma.",
+      "chapter": "PARTE GERAL - LIVRO I - Capitulo II - Dos Direitos da Personalidade"
+    },
+    {
+      "provision_ref": "art186",
+      "section": "186",
+      "title": "Ato Ilicito",
+      "content": "Aquele que, por acao ou omissao voluntaria, negligencia ou imprudencia, violar direito e causar dano a outrem, ainda que exclusivamente moral, comete ato ilicito.",
+      "chapter": "PARTE GERAL - LIVRO III - Dos Atos Ilicitos"
+    },
+    {
+      "provision_ref": "art187",
+      "section": "187",
+      "title": "Abuso de Direito",
+      "content": "Tambem comete ato ilicito o titular de um direito que, ao exerce-lo, excede manifestamente os limites impostos pelo seu fim economico ou social, pela boa-fe ou pelos bons costumes.",
+      "chapter": "PARTE GERAL - LIVRO III - Dos Atos Ilicitos"
+    },
+    {
+      "provision_ref": "art389",
+      "section": "389",
+      "title": "Inadimplemento da Obrigacao",
+      "content": "Nao cumprida a obrigacao, responde o devedor por perdas e danos, mais juros e atualizacao monetaria segundo indices oficiais regularmente estabelecidos, e honorarios de advogado.",
+      "chapter": "PARTE ESPECIAL - LIVRO I - Das Obrigacoes"
+    },
+    {
+      "provision_ref": "art421",
+      "section": "421",
+      "title": "Funcao Social do Contrato",
+      "content": "A liberdade contratual sera exercida nos limites da funcao social do contrato.",
+      "chapter": "PARTE ESPECIAL - LIVRO I - Dos Contratos em Geral"
+    },
+    {
+      "provision_ref": "art422",
+      "section": "422",
+      "title": "Boa-Fe Objetiva",
+      "content": "Os contratantes sao obrigados a guardar, assim na conclusao do contrato, como em sua execucao, os principios de probidade e boa-fe.",
+      "chapter": "PARTE ESPECIAL - LIVRO I - Dos Contratos em Geral"
+    },
+    {
+      "provision_ref": "art927",
+      "section": "927",
+      "title": "Responsabilidade Civil",
+      "content": "Aquele que, por ato ilicito (arts. 186 e 187), causar dano a outrem, fica obrigado a repara-lo. Paragrafo unico - Havera obrigacao de reparar o dano, independentemente de culpa, nos casos especificados em lei, ou quando a atividade normalmente desenvolvida pelo autor do dano implicar, por sua natureza, risco para os direitos de outrem.",
+      "chapter": "PARTE ESPECIAL - LIVRO I - Da Responsabilidade Civil"
+    },
+    {
+      "provision_ref": "art966",
+      "section": "966",
+      "title": "Empresario",
+      "content": "Considera-se empresario quem exerce profissionalmente atividade economica organizada para a producao ou a circulacao de bens ou de servicos. Paragrafo unico - Nao se considera empresario quem exerce profissao intelectual, de natureza cientifica, literaria ou artistica, ainda com o concurso de auxiliares ou colaboradores, salvo se o exercicio da profissao constituir elemento de empresa.",
+      "chapter": "PARTE ESPECIAL - LIVRO II - Do Direito de Empresa"
+    }
+  ]
+}

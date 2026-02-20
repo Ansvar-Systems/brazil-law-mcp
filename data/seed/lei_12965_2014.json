@@ -1,0 +1,96 @@
+{
+  "id": "lei-12965-2014",
+  "type": "lei",
+  "title": "Marco Civil da Internet",
+  "short_name": "Marco Civil da Internet",
+  "status": "in_force",
+  "issued_date": "2014-04-23",
+  "url": "https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2014/lei/l12965.htm",
+  "description": "Establishes principles, guarantees, rights and duties for the use of the Internet in Brazil. Known as the Brazilian Internet Bill of Rights.",
+  "provisions": [
+    {
+      "provision_ref": "art1",
+      "section": "1",
+      "title": "Fundamento Legal",
+      "content": "Esta Lei estabelece principios, garantias, direitos e deveres para o uso da internet no Brasil e determina as diretrizes para atuacao da Uniao, dos Estados, do Distrito Federal e dos Municipios em relacao a materia.",
+      "chapter": "CAPITULO I - Disposicoes Preliminares"
+    },
+    {
+      "provision_ref": "art2",
+      "section": "2",
+      "title": "Fundamentos",
+      "content": "A disciplina do uso da internet no Brasil tem como fundamento o respeito a liberdade de expressao, bem como: I - o reconhecimento da escala mundial da rede; II - os direitos humanos, o desenvolvimento da personalidade e o exercicio da cidadania em meios digitais; III - a pluralidade e a diversidade; IV - a abertura e a colaboracao; V - a livre iniciativa, a livre concorrencia e a defesa do consumidor; VI - a finalidade social da rede.",
+      "chapter": "CAPITULO I - Disposicoes Preliminares"
+    },
+    {
+      "provision_ref": "art3",
+      "section": "3",
+      "title": "Principios",
+      "content": "A disciplina do uso da internet no Brasil tem os seguintes principios: I - garantia da liberdade de expressao, comunicacao e manifestacao de pensamento, nos termos da Constituicao Federal; II - protecao da privacidade; III - protecao dos dados pessoais, na forma da lei; IV - preservacao e garantia da neutralidade de rede; V - preservacao da estabilidade, seguranca e funcionalidade da rede, por meio de medidas tecnicas compativeis com os padroes internacionais e pelo estimulo ao uso de boas praticas; VI - responsabilizacao dos agentes de acordo com suas atividades, nos termos da lei; VII - preservacao da natureza participativa da rede; VIII - liberdade dos modelos de negocios promovidos na internet, desde que nao conflitem com os demais principios estabelecidos nesta Lei.",
+      "chapter": "CAPITULO I - Disposicoes Preliminares"
+    },
+    {
+      "provision_ref": "art7",
+      "section": "7",
+      "title": "Direitos dos Usuarios",
+      "content": "O acesso a internet e essencial ao exercicio da cidadania, e ao usuario sao assegurados os seguintes direitos: I - inviolabilidade da intimidade e da vida privada, sua protecao e indenizacao pelo dano material ou moral decorrente de sua violacao; II - inviolabilidade e sigilo do fluxo de suas comunicacoes pela internet, salvo por ordem judicial; III - inviolabilidade e sigilo de suas comunicacoes privadas armazenadas, salvo por ordem judicial; IV - nao suspensao da conexao a internet, salvo por debito diretamente decorrente de sua utilizacao; V - manutencao da qualidade contratada da conexao a internet; VI - informacoes claras e completas constantes dos contratos de prestacao de servicos.",
+      "chapter": "CAPITULO II - Dos Direitos e Garantias dos Usuarios"
+    },
+    {
+      "provision_ref": "art9",
+      "section": "9",
+      "title": "Neutralidade de Rede",
+      "content": "O responsavel pela transmissao, comutacao ou roteamento tem o dever de tratar de forma isonômica quaisquer pacotes de dados, sem distincao por conteudo, origem e destino, servico, terminal ou aplicacao. Paragraph 1 - A discriminacao ou degradacao do trafego sera regulamentada nos termos das atribuicoes privativas do Presidente da Republica previstas no inciso IV do art. 84 da Constituicao Federal, para a fiel execucao desta Lei, ouvidos o Comite Gestor da Internet e a Agencia Nacional de Telecomunicacoes.",
+      "chapter": "CAPITULO III - Da Provisao de Conexao e de Aplicacoes de Internet"
+    },
+    {
+      "provision_ref": "art10",
+      "section": "10",
+      "title": "Protecao dos Registros",
+      "content": "A guarda e a disponibilizacao dos registros de conexao e de acesso a aplicacoes de internet de que trata esta Lei, bem como de dados pessoais e do conteudo de comunicacoes privadas, devem atender a preservacao da intimidade, da vida privada, da honra e da imagem das partes direta ou indiretamente envolvidas. Paragraph 1 - O provedor responsavel pela guarda somente sera obrigado a disponibilizar os registros mencionados no caput, de forma autonoma ou associados a dados pessoais ou a outras informacoes que possam contribuir para a identificacao do usuario ou do terminal, mediante ordem judicial. Paragraph 2 - O conteudo das comunicacoes privadas somente podera ser disponibilizado mediante ordem judicial.",
+      "chapter": "CAPITULO III - Da Provisao de Conexao e de Aplicacoes de Internet"
+    },
+    {
+      "provision_ref": "art13",
+      "section": "13",
+      "title": "Guarda de Registros de Conexao",
+      "content": "Na provisao de conexao a internet, cabe ao administrador de sistema autonomo respectivo o dever de manter os registros de conexao, sob sigilo, em ambiente controlado e de seguranca, pelo prazo de 1 (um) ano, nos termos do regulamento. Paragraph 1 - A responsabilidade pela manutencao dos registros de conexao nao podera ser transferida a terceiros.",
+      "chapter": "CAPITULO III - Da Provisao de Conexao e de Aplicacoes de Internet"
+    },
+    {
+      "provision_ref": "art15",
+      "section": "15",
+      "title": "Guarda de Registros de Acesso a Aplicacoes",
+      "content": "O provedor de aplicacoes de internet constituido na forma de pessoa juridica e que exerca essa atividade de forma organizada, profissionalmente e com fins economicos devera manter os respectivos registros de acesso a aplicacoes de internet, sob sigilo, em ambiente controlado e de seguranca, pelo prazo de 6 (seis) meses.",
+      "chapter": "CAPITULO III - Da Provisao de Conexao e de Aplicacoes de Internet"
+    },
+    {
+      "provision_ref": "art18",
+      "section": "18",
+      "title": "Responsabilidade do Provedor de Conexao",
+      "content": "O provedor de conexao a internet nao sera responsabilizado civilmente por danos decorrentes de conteudo gerado por terceiros.",
+      "chapter": "CAPITULO III - Da Provisao de Conexao e de Aplicacoes de Internet"
+    },
+    {
+      "provision_ref": "art19",
+      "section": "19",
+      "title": "Responsabilidade por Conteudo de Terceiros",
+      "content": "Com o intuito de assegurar a liberdade de expressao e impedir a censura, o provedor de aplicacoes de internet somente podera ser responsabilizado civilmente por danos decorrentes de conteudo gerado por terceiros se, apos ordem judicial especifica, nao tomar as providencias para, no ambito e nos limites tecnicos do seu servico e dentro do prazo assinalado, tornar indisponivel o conteudo apontado como infringente, ressalvadas as disposicoes legais em contrario.",
+      "chapter": "CAPITULO III - Da Provisao de Conexao e de Aplicacoes de Internet"
+    },
+    {
+      "provision_ref": "art21",
+      "section": "21",
+      "title": "Conteudo Intimo",
+      "content": "O provedor de aplicacoes de internet que disponibilize conteudo gerado por terceiros sera responsabilizado subsidiariamente pela violacao da intimidade decorrente da divulgacao, sem autorizacao de seus participantes, de imagens, de videos ou de outros materiais contendo cenas de nudez ou de atos sexuais de carater privado quando, apos o recebimento de notificacao pelo participante ou seu representante legal, deixar de promover, de forma diligente, no ambito e nos limites tecnicos do seu servico, a indisponibilizacao desse conteudo.",
+      "chapter": "CAPITULO III - Da Provisao de Conexao e de Aplicacoes de Internet"
+    },
+    {
+      "provision_ref": "art25",
+      "section": "25",
+      "title": "Atuacao do Poder Publico",
+      "content": "As aplicacoes de internet de entes do poder publico devem buscar: I - compatibilidade dos servicos de governo eletronico com diversos terminais, sistemas operacionais e aplicativos para seu acesso; II - acessibilidade a todos os interessados, independentemente de suas capacidades fisico-motoras, perceptivas, sensoriais, intelectuais e mentais; III - compatibilidade tanto com a leitura humana quanto com o tratamento automatizado das informacoes; IV - facilidade de uso dos servicos de governo eletronico; V - fortalecimento da participacao social nas politicas publicas.",
+      "chapter": "CAPITULO IV - Da Atuacao do Poder Publico"
+    }
+  ]
+}

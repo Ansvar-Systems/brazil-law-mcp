@@ -1,0 +1,82 @@
+{
+  "id": "lei-9472-1997",
+  "type": "lei",
+  "title": "Lei Geral de Telecomunicacoes",
+  "short_name": "LGT",
+  "status": "in_force",
+  "issued_date": "1997-07-16",
+  "url": "https://www.planalto.gov.br/ccivil_03/leis/l9472.htm",
+  "description": "The Brazilian General Telecommunications Law. Establishes the regulatory framework for telecommunications services, creates ANATEL (National Telecommunications Agency), and defines user rights.",
+  "provisions": [
+    {
+      "provision_ref": "art1",
+      "section": "1",
+      "title": "Organizacao dos Servicos de Telecomunicacoes",
+      "content": "Compete a Uniao, por intermedio do orgao regulador e nos termos das politicas estabelecidas pelos Poderes Executivo e Legislativo, organizar a exploracao dos servicos de telecomunicacoes.",
+      "chapter": "LIVRO I - Dos Principios Fundamentais"
+    },
+    {
+      "provision_ref": "art2",
+      "section": "2",
+      "title": "Dever do Poder Publico",
+      "content": "O Poder Publico tem o dever de: I - garantir, a toda a populacao, o acesso as telecomunicacoes, a tarifas e precos razoaveis, em condicoes adequadas; II - estimular a expansao do uso de redes e servicos de telecomunicacoes pelos servicos de interesse publico em beneficio da populacao brasileira; III - adotar medidas que promovam a competicao e a diversidade dos servicos, incrementem sua oferta e propiciem padroes de qualidade compativeis com a exigencia dos usuarios; IV - fortalecer o papel regulador do Estado; V - criar oportunidades de investimento e estimular o desenvolvimento tecnologico e industrial, em ambiente competitivo; VI - criar condicoes para que o desenvolvimento do setor seja harmonico com as metas de desenvolvimento social do Pais.",
+      "chapter": "LIVRO I - Dos Principios Fundamentais"
+    },
+    {
+      "provision_ref": "art3",
+      "section": "3",
+      "title": "Direitos do Usuario",
+      "content": "O usuario de servicos de telecomunicacoes tem direito: I - de acesso aos servicos de telecomunicacoes, com padroes de qualidade e regularidade adequados a sua natureza, em qualquer ponto do territorio nacional; II - a liberdade de escolha de sua prestadora de servico; III - de nao ser discriminado quanto as condicoes de acesso e fruicao do servico; IV - a informacao adequada sobre as condicoes de prestacao dos servicos, suas tarifas e precos; V - a inviolabilidade e ao segredo de sua comunicacao, salvo nas hipoteses e condicoes constitucional e legalmente previstas; VI - de nao ser exposto a publicidade sem o seu previo consentimento; VII - a modicidade das tarifas e precos.",
+      "chapter": "LIVRO I - Dos Principios Fundamentais"
+    },
+    {
+      "provision_ref": "art8",
+      "section": "8",
+      "title": "Criacao da ANATEL",
+      "content": "Fica criada a Agencia Nacional de Telecomunicacoes, entidade integrante da Administracao Publica Federal indireta, submetida a regime autarquico especial e vinculada ao Ministerio das Comunicacoes, com a funcao de orgao regulador das telecomunicacoes, com sede no Distrito Federal, podendo estabelecer unidades regionais.",
+      "chapter": "LIVRO II - Do Orgao Regulador e das Politicas Setoriais"
+    },
+    {
+      "provision_ref": "art19",
+      "section": "19",
+      "title": "Competencias da ANATEL",
+      "content": "A Agencia compete adotar as medidas necessarias para o atendimento do interesse publico e para o desenvolvimento das telecomunicacoes brasileiras, atuando com independencia, imparcialidade, legalidade, impessoalidade e publicidade, e especialmente: I - implementar, em sua esfera de atribuicoes, a politica nacional de telecomunicacoes; II - representar o Brasil nos organismos internacionais de telecomunicacoes, sob a coordenacao do Poder Executivo; III - elaborar e propor ao Presidente da Republica, por intermedio do Ministro de Estado das Comunicacoes, a adocao das medidas a que se referem os incisos I a IV do art. 18; IV - expedir normas quanto a outorga, prestacao e fruicao dos servicos de telecomunicacoes no regime publico.",
+      "chapter": "LIVRO II - Do Orgao Regulador e das Politicas Setoriais"
+    },
+    {
+      "provision_ref": "art60",
+      "section": "60",
+      "title": "Servico de Telecomunicacoes",
+      "content": "Servico de telecomunicacoes e o conjunto de atividades que possibilita a oferta de telecomunicacao. Paragraph 1 - Telecomunicacao e a transmissao, emissao ou recepcao, por fio, radioeletricidade, meios opticos ou qualquer outro processo eletromagnetico, de simbolos, caracteres, sinais, escritos, imagens, sons ou informacoes de qualquer natureza. Paragraph 2 - Estacao de telecomunicacoes e o conjunto de equipamentos ou aparelhos, dispositivos e demais meios necessarios a realizacao de telecomunicacao, seus acessorios e perifericos, e, quando for o caso, as instalacoes que os abrigam e complementam, inclusive terminais portateis.",
+      "chapter": "LIVRO III - Da Organizacao dos Servicos de Telecomunicacoes"
+    },
+    {
+      "provision_ref": "art61",
+      "section": "61",
+      "title": "Classificacao dos Servicos",
+      "content": "Os servicos de telecomunicacoes classificam-se em: I - quanto ao regime juridico de sua prestacao: a) servico prestado em regime publico, que e o prestado mediante concessao ou permissao, com atribuicao a sua prestadora de obrigacoes de universalizacao e de continuidade; b) servico prestado em regime privado, que e o prestado mediante autorizacao; II - quanto a abrangencia dos interesses a que atendem: a) servico de interesse coletivo; b) servico de interesse restrito.",
+      "chapter": "LIVRO III - Da Organizacao dos Servicos de Telecomunicacoes"
+    },
+    {
+      "provision_ref": "art72",
+      "section": "72",
+      "title": "Sigilo das Telecomunicacoes",
+      "content": "Apenas na execucao de sua atividade, a prestadora podera valer-se de informacoes relativas a utilizacao individual do servico pelo usuario. Paragraph 1 - A divulgacao das informacoes individuais depende da anuencia expressa e especifica do usuario. Paragraph 2 - A prestadora podera divulgar a terceiros informacoes agregadas sobre o uso de seus servicos, desde que elas nao permitam a identificacao, direta ou indireta, do usuario, ou a violacao de sua intimidade.",
+      "chapter": "LIVRO III - Capitulo II - Do Regime Publico"
+    },
+    {
+      "provision_ref": "art131",
+      "section": "131",
+      "title": "Autorizacao de Servico",
+      "content": "A exploracao de servico no regime privado depende de previa autorizacao da Agencia, que atendera aos principios do art. 127.",
+      "chapter": "LIVRO III - Capitulo III - Do Regime Privado"
+    },
+    {
+      "provision_ref": "art183",
+      "section": "183",
+      "title": "Desenvolvimento de Atividades Clandestinas",
+      "content": "Desenvolver clandestinamente atividades de telecomunicacao. Pena - detencao de dois a quatro anos, aumentada da metade se houver dano a terceiro, e multa de R$ 10.000,00 (dez mil reais). Paragrafo unico - Incorre na mesma pena quem, direta ou indiretamente, concorrer para o crime.",
+      "chapter": "LIVRO IV - Das Sancoes"
+    }
+  ]
+}
