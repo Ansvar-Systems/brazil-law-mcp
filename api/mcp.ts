@@ -3,142 +3,97 @@ import { Server } from '@modelcontextprotocol/sdk/server/index.js';
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
 import Database from '@ansvar/mcp-sqlite';
 import { join } from 'path';
-import { existsSync, createWriteStream, rmSync, renameSync } from 'fs';
-import { pipeline } from 'stream/promises';
-import { createGunzip } from 'zlib';
-import https from 'https';
-import type { IncomingMessage } from 'http';
+import { copyFileSync, existsSync, readFileSync, rmSync, statSync, writeFileSync } from 'fs';
+import { createHash } from 'crypto';
 
 import { registerTools } from '../src/tools/registry.js';
 import type { AboutContext } from '../src/tools/registry.js';
 
-// ---------------------------------------------------------------------------
-// Server identity
-// ---------------------------------------------------------------------------
-
 const SERVER_NAME = 'brazil-law-mcp';
 const SERVER_VERSION = '1.0.0';
 
-// ---------------------------------------------------------------------------
-// Database — downloaded from GitHub Releases on cold start (Strategy B)
-// ---------------------------------------------------------------------------
-
+const SOURCE_DB = join(process.cwd(), 'data', 'database.db');
 const TMP_DB = '/tmp/database.db';
-const TMP_DB_TMP = '/tmp/database.db.tmp';
 const TMP_DB_LOCK = '/tmp/database.db.lock';
-
-const GITHUB_REPO = 'Ansvar-Systems/brazil-law-mcp';
-const RELEASE_TAG = `v${SERVER_VERSION}`;
-const ASSET_NAME = 'database.db.gz';
-const DEFAULT_RELEASE_URL =
-  `https://github.com/${GITHUB_REPO}/releases/download/${RELEASE_TAG}/${ASSET_NAME}`;
+const TMP_DB_SHM = '/tmp/database.db-shm';
+const TMP_DB_WAL = '/tmp/database.db-wal';
+const TMP_DB_META = '/tmp/database.db.meta.json';
 
 let db: InstanceType<typeof Database> | null = null;
-let resolvedDbPath = TMP_DB;
-let dbReady = false;
-let dbReadyPromise: Promise<void> | null = null;
 
-function httpsGet(url: string): Promise<IncomingMessage> {
-  return new Promise((resolve, reject) => {
-    https
-      .get(url, { headers: { 'User-Agent': SERVER_NAME } }, resolve)
-      .on('error', reject);
-  });
+interface TmpDbMeta {
+  source_db: string;
+  source_signature: string;
 }
 
-async function downloadDatabase(url: string): Promise<void> {
-  let response = await httpsGet(url);
-
-  // Follow up to 5 redirects (GitHub redirects to S3)
-  let redirects = 0;
-  while (
-    response.statusCode &&
-    response.statusCode >= 300 &&
-    response.statusCode < 400 &&
-    response.headers.location &&
-    redirects < 5
-  ) {
-    response = await httpsGet(response.headers.location);
-    redirects++;
-  }
-
-  if (response.statusCode !== 200) {
-    throw new Error(
-      `Failed to download database: HTTP ${response.statusCode} from ${url}`,
-    );
-  }
-
-  const gunzip = createGunzip();
-  const out = createWriteStream(TMP_DB_TMP);
-  await pipeline(response, gunzip, out);
-  renameSync(TMP_DB_TMP, TMP_DB);
-  resolvedDbPath = TMP_DB;
+function computeSourceSignature(): string {
+  const stats = statSync(SOURCE_DB);
+  return `${stats.size}:${Math.trunc(stats.mtimeMs)}`;
 }
 
-async function initializeDatabase(): Promise<void> {
-  if (dbReady) return;
-
-  if (existsSync(TMP_DB_LOCK)) {
-    rmSync(TMP_DB_LOCK, { recursive: true, force: true });
+function readTmpMeta(): TmpDbMeta | null {
+  if (!existsSync(TMP_DB_META)) return null;
+  try {
+    const parsed = JSON.parse(readFileSync(TMP_DB_META, 'utf-8')) as Partial<TmpDbMeta>;
+    if (parsed.source_db && parsed.source_signature) {
+      return { source_db: parsed.source_db, source_signature: parsed.source_signature };
+    }
+  } catch {
+    // Ignore corrupted metadata
   }
+  return null;
+}
 
-  const envDb = process.env.BRAZIL_LAW_DB_PATH;
-  if (envDb && existsSync(envDb)) {
-    resolvedDbPath = envDb;
-    dbReady = true;
+function clearTmpDbArtifacts() {
+  rmSync(TMP_DB_LOCK, { recursive: true, force: true });
+  rmSync(TMP_DB_SHM, { force: true });
+  rmSync(TMP_DB_WAL, { force: true });
+  rmSync(TMP_DB, { force: true });
+  rmSync(TMP_DB_META, { force: true });
+}
+
+function ensureTempDbIsFresh() {
+  const sourceSignature = computeSourceSignature();
+  const meta = readTmpMeta();
+  const shouldRefresh =
+    !existsSync(TMP_DB) || !meta || meta.source_db !== SOURCE_DB || meta.source_signature !== sourceSignature;
+
+  if (shouldRefresh) {
+    clearTmpDbArtifacts();
+    copyFileSync(SOURCE_DB, TMP_DB);
+    writeFileSync(TMP_DB_META, JSON.stringify({ source_db: SOURCE_DB, source_signature: sourceSignature }), 'utf-8');
     return;
   }
 
-  if (existsSync(TMP_DB)) {
-    resolvedDbPath = TMP_DB;
-    dbReady = true;
-    return;
-  }
-
-  // Local fallback if a bundled DB is available
-  const bundledDb = join(process.cwd(), 'data', 'database-free.db');
-  if (existsSync(bundledDb)) {
-    const { copyFileSync } = await import('fs');
-    copyFileSync(bundledDb, TMP_DB);
-    resolvedDbPath = TMP_DB;
-    dbReady = true;
-    return;
-  }
-
-  const downloadUrl = process.env.BRAZIL_LAW_DB_URL ?? DEFAULT_RELEASE_URL;
-  console.log(`[${SERVER_NAME}] Downloading database from ${downloadUrl}`);
-  await downloadDatabase(downloadUrl);
-  console.log(`[${SERVER_NAME}] Database download complete`);
-
-  dbReady = true;
+  rmSync(TMP_DB_LOCK, { recursive: true, force: true });
 }
 
-async function ensureDatabase(): Promise<void> {
-  if (dbReady) return;
+function computeAboutContext(): AboutContext {
+  let fingerprint = 'unknown';
+  let dbBuilt = 'unknown';
 
-  if (!dbReadyPromise) {
-    dbReadyPromise = initializeDatabase().finally(() => {
-      if (!dbReady) dbReadyPromise = null;
-    });
-  }
+  try {
+    const buf = readFileSync(SOURCE_DB);
+    fingerprint = createHash('sha256').update(buf).digest('hex').slice(0, 12);
+  } catch { /* ignore */ }
 
-  await dbReadyPromise;
+  try {
+    const database = getDatabase();
+    const row = database.prepare("SELECT value FROM db_metadata WHERE key = 'built_at'").get() as { value: string } | undefined;
+    if (row?.value) dbBuilt = row.value;
+  } catch { /* ignore */ }
+
+  return { version: SERVER_VERSION, fingerprint, dbBuilt };
 }
 
 function getDatabase(): InstanceType<typeof Database> {
   if (!db) {
-    if (!existsSync(resolvedDbPath)) {
-      throw new Error(`Resolved database path does not exist: ${resolvedDbPath}`);
-    }
-    db = new Database(resolvedDbPath, { readonly: true });
+    ensureTempDbIsFresh();
+    db = new Database(TMP_DB, { readonly: true });
     db.pragma('foreign_keys = ON');
   }
   return db;
 }
-
-// ---------------------------------------------------------------------------
-// Vercel handler
-// ---------------------------------------------------------------------------
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -161,23 +116,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    await ensureDatabase();
+    if (!existsSync(SOURCE_DB)) {
+      res.status(500).json({ error: `Database not found at ${SOURCE_DB}` });
+      return;
+    }
+
     const database = getDatabase();
-
-    const server = new Server(
-      { name: SERVER_NAME, version: SERVER_VERSION },
-      { capabilities: { tools: {} } }
-    );
-
-    let fingerprint = 'http-runtime';
-    let dbBuilt = 'unknown';
-    try {
-      const row = database.prepare("SELECT value FROM db_metadata WHERE key = 'built_at'").get() as { value: string } | undefined;
-      if (row) dbBuilt = row.value;
-    } catch { /* ignore */ }
-    const aboutContext: AboutContext = { version: SERVER_VERSION, fingerprint, dbBuilt };
-
-    registerTools(server, database, aboutContext);
+    const server = new Server({ name: SERVER_NAME, version: SERVER_VERSION }, { capabilities: { tools: {} } });
+    registerTools(server, database, computeAboutContext());
 
     const transport = new StreamableHTTPServerTransport({
       sessionIdGenerator: undefined,
