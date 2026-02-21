@@ -123,6 +123,53 @@ Once connected, just ask naturally:
 
 ---
 
+## Key Legislation Covered
+
+| Law | Year | Domain | Key Topics |
+|-----|------|--------|------------|
+| **Lei Geral de Protecao de Dados (LGPD)** | 2018 (Lei 13.709) | Data Protection | Personal data processing, consent, data subject rights, ANPD, international data transfers, extraterritorial application |
+| **Marco Civil da Internet** | 2014 (Lei 12.965) | Internet Regulation | Net neutrality, data retention, intermediary liability, freedom of expression, privacy of communications |
+| **Cybercrime Law (Carolina Dieckmann Law)** | 2012 (Lei 12.737) | Cybercrime | Unauthorized access to computer devices, data interception, criminal penalties |
+| **Consumer Protection Code** | 1990 (Lei 8.078) | Consumer Rights | Consumer rights, product liability, unfair commercial practices, class actions |
+| **General Telecommunications Law** | 1997 (Lei 9.472) | Telecommunications | Telecom regulation, ANATEL, service licensing, spectrum management |
+| **Brazilian Civil Code** | 2002 (Lei 10.406) | Civil Law | Persons, obligations, contracts, property, privacy and personality rights |
+
+---
+
+---
+
+## Deployment Tier
+
+**MEDIUM** -- dual tier, free database bundled in npm package.
+
+| Tier | Platform | Database | Content |
+|------|----------|----------|---------|
+| **Free** | Vercel (Hobby) / npm (stdio) | Core federal laws (~120-200 MB) | Key federal legislation (LGPD, Marco Civil, Cybercrime Law, Consumer Protection Code, Civil Code), FTS search, EU/international cross-references |
+| **Professional** | Azure Container Apps / Docker / Local | Full database (~600 MB - 1 GB) | + All federal laws and decrees, ANPD regulations and guidance, STF/STJ case law summaries, supplementary instruments |
+
+The full database is larger due to the comprehensive scope of Brazilian federal legislation and supplementary regulatory materials from ANPD. The free tier contains all key data protection, cybercrime, consumer, and internet legislation from Planalto.
+
+---
+
+---
+
+## Database Estimates
+
+| Component | Free Tier | Full (Professional) |
+|-----------|-----------|---------------------|
+| Core federal laws | ~90-140 MB | ~90-140 MB |
+| All federal decrees & instruments | -- | ~300-500 MB |
+| ANPD guidance & resolutions | -- | ~30-50 MB |
+| STF/STJ case law summaries | -- | ~100-200 MB |
+| Cross-references & metadata | ~5 MB | ~15 MB |
+| **Total** | **~120-200 MB** | **~600 MB - 1 GB** |
+
+**Delivery strategy:** Free-tier DB bundled in npm package (Strategy A -- fits within Vercel 250 MB function limit). If final size exceeds 250 MB after ingestion, switch to Strategy B (runtime download from GitHub Releases).
+
+---
+
+---
+
 ## Available Tools (13)
 
 ### Core Legal Research Tools (8)
