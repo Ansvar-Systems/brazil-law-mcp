@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "jurisdiction": "BR",
+  "portal": "planalto.gov.br",
+  "generated": "2026-02-22",
+  "total_laws": 6,
+  "total_provisions": 65,
+  "laws": [
+    {
+      "id": "lei-10406-2002",
+      "title": "Codigo Civil",
+      "provisions": 12
+    },
+    {
+      "id": "lei-12737-2012",
+      "title": "Lei de Crimes Ciberneticos (Carolina Dieckmann)",
+      "provisions": 5
+    },
+    {
+      "id": "lei-12965-2014",
+      "title": "Marco Civil da Internet",
+      "provisions": 12
+    },
+    {
+      "id": "lei-13709-2018",
+      "title": "Lei Geral de Protecao de Dados Pessoais (LGPD)",
+      "provisions": 16
+    },
+    {
+      "id": "lei-8078-1990",
+      "title": "Codigo de Defesa do Consumidor",
+      "provisions": 10
+    },
+    {
+      "id": "lei-9472-1997",
+      "title": "Lei Geral de Telecomunicacoes",
+      "provisions": 10
+    }
+  ]
+}

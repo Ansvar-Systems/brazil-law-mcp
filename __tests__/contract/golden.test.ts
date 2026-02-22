@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import { createHash } from 'node:crypto';
-import { readFileSync, rmdirSync, rmSync } from 'node:fs';
+import { existsSync, readFileSync, rmdirSync, rmSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
@@ -10,6 +10,14 @@ import Database from '@ansvar/mcp-sqlite';
 import { registerTools } from '../../src/tools/registry.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
+
+// ---------------------------------------------------------------------------
+// CI guard — skip when database.db is not available (npm-only installs)
+// ---------------------------------------------------------------------------
+
+const dbPath =
+  process.env['BRAZIL_LAW_DB_PATH'] ?? join(__dirname, '..', '..', 'data', 'database.db');
+const dbAvailable = existsSync(dbPath);
 
 // ---------------------------------------------------------------------------
 // Fixture types
@@ -137,13 +145,11 @@ let mcpClient: Client;
 let db: InstanceType<typeof Database>;
 
 // ---------------------------------------------------------------------------
-// Contract test runner
+// Contract test runner — skipped when database.db is not present
 // ---------------------------------------------------------------------------
 
-describe(`Contract tests: ${fixture.mcp_name}`, () => {
+describe.skipIf(!dbAvailable)(`Contract tests: ${fixture.mcp_name}`, () => {
   beforeAll(async () => {
-    const dbPath =
-      process.env['BRAZIL_LAW_DB_PATH'] ?? join(__dirname, '..', '..', 'data', 'database.db');
     try { rmdirSync(dbPath + '.lock'); } catch { /* ignore */ }
     try { rmSync(dbPath + '-wal', { force: true }); } catch { /* ignore */ }
     try { rmSync(dbPath + '-shm', { force: true }); } catch { /* ignore */ }
