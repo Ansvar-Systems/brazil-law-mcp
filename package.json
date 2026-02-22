@@ -1,6 +1,6 @@
 {
   "name": "@ansvar/brazil-law-mcp",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "mcpName": "eu.ansvar/brazil-law-mcp",
   "description": "Brazilian federal law database covering data protection (LGPD), internet regulation (Marco Civil), cybercrime, consumer protection, telecommunications, and civil code with Portuguese full-text search",
   "author": "Ansvar Systems <hello@ansvar.eu>",
