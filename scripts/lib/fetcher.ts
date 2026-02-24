@@ -10,7 +10,7 @@
  * - No auth needed (public domain / government open data)
  */
 
-const USER_AGENT = 'BrazilLawMCP/1.0 (https://github.com/Ansvar-Systems/brazil-law-mcp; hello@ansvar.eu)';
+const USER_AGENT = 'Mozilla/5.0 (compatible; BrazilLawMCP/1.0; +https://github.com/Ansvar-Systems/brazil-law-mcp)';
 const MIN_DELAY_MS = 500;
 
 let lastRequestTime = 0;
