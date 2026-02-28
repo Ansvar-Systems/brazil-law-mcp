@@ -11,5 +11,3 @@ coverage/
 .DS_Store
 data/seed/
 data/source/
-.claude/
-.serena/
