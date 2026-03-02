@@ -1,14 +1,16 @@
 # Brazilian Law MCP Server
 
-**The Planalto alternative for the AI age.**
+**The LexML (Presidência da República) alternative for the AI age.**
 
-[![npm version](https://badge.fury.io/js/%40ansvar/brazil-law-mcp.svg)](https://www.npmjs.com/package/@ansvar/brazil-law-mcp)
+[![npm version](https://badge.fury.io/js/@ansvar%2Fbrazil-law-mcp.svg)](https://www.npmjs.com/package/@ansvar/brazil-law-mcp)
 [![MCP Registry](https://img.shields.io/badge/MCP-Registry-blue)](https://registry.modelcontextprotocol.io)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![GitHub stars](https://img.shields.io/github/stars/Ansvar-Systems/Brazil-law-mcp?style=social)](https://github.com/Ansvar-Systems/Brazil-law-mcp)
-[![CI](https://github.com/Ansvar-Systems/Brazil-law-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/Ansvar-Systems/Brazil-law-mcp/actions/workflows/ci.yml)
+[![GitHub stars](https://img.shields.io/github/stars/Ansvar-Systems/brazil-law-mcp?style=social)](https://github.com/Ansvar-Systems/brazil-law-mcp)
+[![CI](https://github.com/Ansvar-Systems/brazil-law-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/Ansvar-Systems/brazil-law-mcp/actions/workflows/ci.yml)
+[![Database](https://img.shields.io/badge/database-pre--built-green)](docs/EU_INTEGRATION_GUIDE.md)
+[![Provisions](https://img.shields.io/badge/provisions-28%2C585-blue)](docs/EU_INTEGRATION_GUIDE.md)
 
-Query **Brazilian legislation** -- covering data protection, cybersecurity, corporate law, and more -- directly from Claude, Cursor, or any MCP-compatible client.
+Pesquise **2.471 leis federais brasileiras** -- da LGPD (Lei Geral de Proteção de Dados) e o Marco Civil da Internet ao Código Penal, Código Civil e a CLT (Consolidação das Leis do Trabalho) -- diretamente do Claude, Cursor ou qualquer cliente compatível com MCP.
 
 If you're building legal tech, compliance tools, or doing Brazilian legal research, this is your verified reference database.
 
@@ -16,17 +18,17 @@ Built by [Ansvar Systems](https://ansvar.eu) -- Stockholm, Sweden
 
 ---
 
-## Why This Exists
+## Por que isso existe
 
-Brazilian legal research is scattered across official government databases, commercial legal platforms, and institutional archives. Whether you're:
-- A **lawyer** validating citations in a brief or contract
-- A **compliance officer** checking if a statute is still in force
-- A **legal tech developer** building tools on Brazilian law
-- A **researcher** tracing legislative history
+A pesquisa jurídica federal brasileira está espalhada entre lexml.gov.br, planalto.gov.br, e jusbrasil.com.br, com legislação publicada no Diário Oficial da União. Seja você:
+- Um **advogado** validando citações em uma petição ou contrato
+- Um **profissional de compliance** verificando as obrigações da LGPD ou regulamentações da ANPD
+- Um **desenvolvedor legaltech** construindo ferramentas sobre o direito brasileiro
+- Um **pesquisador** rastreando legislação federal através de 2.471 leis
 
-...you shouldn't need dozens of browser tabs and manual PDF cross-referencing. Ask Claude. Get the exact provision. With context.
+...você não deveria precisar de dezenas de abas no navegador e pesquisa manual em PDF. Pergunte ao Claude. Obtenha a disposição exata. Com contexto.
 
-This MCP server makes Brazilian law **searchable, cross-referenceable, and AI-readable**.
+Este servidor MCP torna o direito brasileiro **consultável, referenciável e legível por IA**.
 
 ---
 
@@ -36,12 +38,12 @@ This MCP server makes Brazilian law **searchable, cross-referenceable, and AI-re
 
 > Connect directly to the hosted version -- zero dependencies, nothing to install.
 
-**Endpoint:** `https://brazilian-law-mcp.vercel.app/mcp`
+**Endpoint:** `https://brazil-law-mcp.vercel.app/mcp`
 
 | Client | How to Connect |
 |--------|---------------|
 | **Claude.ai** | Settings > Connectors > Add Integration > paste URL |
-| **Claude Code** | `claude mcp add brazil-law --transport http https://brazilian-law-mcp.vercel.app/mcp` |
+| **Claude Code** | `claude mcp add brazil-law --transport http https://brazil-law-mcp.vercel.app/mcp` |
 | **Claude Desktop** | Add to config (see below) |
 | **GitHub Copilot** | Add to VS Code settings (see below) |
 
@@ -52,7 +54,7 @@ This MCP server makes Brazilian law **searchable, cross-referenceable, and AI-re
   "mcpServers": {
     "brazil-law": {
       "type": "url",
-      "url": "https://brazilian-law-mcp.vercel.app/mcp"
+      "url": "https://brazil-law-mcp.vercel.app/mcp"
     }
   }
 }
@@ -65,7 +67,7 @@ This MCP server makes Brazilian law **searchable, cross-referenceable, and AI-re
   "github.copilot.chat.mcp.servers": {
     "brazil-law": {
       "type": "http",
-      "url": "https://brazilian-law-mcp.vercel.app/mcp"
+      "url": "https://brazil-law-mcp.vercel.app/mcp"
     }
   }
 }
@@ -108,65 +110,103 @@ npx @ansvar/brazil-law-mcp
 
 ---
 
-## Example Queries
+## Exemplos de Consultas
 
-Once connected, just ask naturally:
+Uma vez conectado, pergunte naturalmente:
 
-- *"What does the Brazilian data protection law say about consent?"*
-- *"Search for cybersecurity requirements in Brazilian legislation"*
-- *"Is this statute still in force?"*
-- *"Find provisions about personal data in Brazilian law"*
-- *"What EU directives does this Brazilian law implement?"*
-- *"Which Brazilian laws implement the GDPR?"*
-- *"Validate this legal citation"*
-- *"Build a legal stance on data breach notification requirements"*
-
----
-
-## Key Legislation Covered
-
-| Law | Year | Domain | Key Topics |
-|-----|------|--------|------------|
-| **Lei Geral de Protecao de Dados (LGPD)** | 2018 (Lei 13.709) | Data Protection | Personal data processing, consent, data subject rights, ANPD, international data transfers, extraterritorial application |
-| **Marco Civil da Internet** | 2014 (Lei 12.965) | Internet Regulation | Net neutrality, data retention, intermediary liability, freedom of expression, privacy of communications |
-| **Cybercrime Law (Carolina Dieckmann Law)** | 2012 (Lei 12.737) | Cybercrime | Unauthorized access to computer devices, data interception, criminal penalties |
-| **Consumer Protection Code** | 1990 (Lei 8.078) | Consumer Rights | Consumer rights, product liability, unfair commercial practices, class actions |
-| **General Telecommunications Law** | 1997 (Lei 9.472) | Telecommunications | Telecom regulation, ANATEL, service licensing, spectrum management |
-| **Brazilian Civil Code** | 2002 (Lei 10.406) | Civil Law | Persons, obligations, contracts, property, privacy and personality rights |
+- *"Pesquisar 'proteção de dados pessoais' na LGPD (Lei 13.709/2018)"*
+- *"O que diz o artigo 46 da LGPD sobre segurança dos dados?"*
+- *"Quais são as penalidades previstas no Código Penal para crimes cibernéticos?"*
+- *"Encontrar disposições sobre rescisão contratual na CLT"*
+- *"O Marco Civil da Internet ainda está em vigor?"*
+- *"Pesquisar obrigações de consentimento no Código Civil"*
+- *"Como a LGPD se alinha com o GDPR europeu em termos de bases legais?"*
+- *"Validar a citação: Lei 13.709/2018, art. 7º, inciso I"*
+- *"Construir uma posição jurídica sobre direitos dos titulares de dados no Brasil"*
+- *"Encontrar disposições sobre proteção ao consumidor no Código de Defesa do Consumidor"*
 
 ---
 
----
+## What's Included
 
-## Deployment Tier
+| Category | Count | Details |
+|----------|-------|---------|
+| **Federal Laws** | 2,471 laws | Comprehensive Brazilian federal legislation |
+| **Provisions** | 28,585 sections | Full-text searchable with FTS5 |
+| **Preparatory Works** | 116,256 documents | Legislative history and parliamentary records |
+| **Database Size** | ~50 MB | Optimized SQLite, portable |
+| **Language** | Portuguese (Brazilian) | Official language of Brazilian law |
+| **Freshness Checks** | Automated | Drift detection against LexML and Planalto |
 
-**MEDIUM** -- dual tier, free database bundled in npm package.
+### Key Laws Included
 
-| Tier | Platform | Database | Content |
-|------|----------|----------|---------|
-| **Free** | Vercel (Hobby) / npm (stdio) | Core federal laws (~120-200 MB) | Key federal legislation (LGPD, Marco Civil, Cybercrime Law, Consumer Protection Code, Civil Code), FTS search, EU/international cross-references |
-| **Professional** | Azure Container Apps / Docker / Local | Full database (~600 MB - 1 GB) | + All federal laws and decrees, ANPD regulations and guidance, STF/STJ case law summaries, supplementary instruments |
+| Law | Description |
+|-----|-------------|
+| Lei 13.709/2018 (LGPD) | Lei Geral de Proteção de Dados Pessoais |
+| Lei 12.965/2014 (Marco Civil) | Marco Civil da Internet |
+| Decreto-Lei 2.848/1940 (CP) | Código Penal |
+| Lei 10.406/2002 (CC) | Código Civil |
+| Decreto-Lei 5.452/1943 (CLT) | Consolidação das Leis do Trabalho |
+| Lei 8.078/1990 (CDC) | Código de Defesa do Consumidor |
+| Lei 12.737/2012 (Lei Carolina Dieckmann) | Crimes cibernéticos |
+| Lei 9.472/1997 (LGT) | Lei Geral de Telecomunicações |
 
-The full database is larger due to the comprehensive scope of Brazilian federal legislation and supplementary regulatory materials from ANPD. The free tier contains all key data protection, cybercrime, consumer, and internet legislation from Planalto.
-
----
-
----
-
-## Database Estimates
-
-| Component | Free Tier | Full (Professional) |
-|-----------|-----------|---------------------|
-| Core federal laws | ~90-140 MB | ~90-140 MB |
-| All federal decrees & instruments | -- | ~300-500 MB |
-| ANPD guidance & resolutions | -- | ~30-50 MB |
-| STF/STJ case law summaries | -- | ~100-200 MB |
-| Cross-references & metadata | ~5 MB | ~15 MB |
-| **Total** | **~120-200 MB** | **~600 MB - 1 GB** |
-
-**Delivery strategy:** Free-tier DB bundled in npm package (Strategy A -- fits within Vercel 250 MB function limit). If final size exceeds 250 MB after ingestion, switch to Strategy B (runtime download from GitHub Releases).
+**Verified data only** -- every citation is validated against official sources (lexml.gov.br, planalto.gov.br). Zero LLM-generated content.
 
 ---
+
+## LGPD and GDPR Alignment
+
+**Brazil's LGPD (Lei Geral de Proteção de Dados) is explicitly modelled on the EU GDPR.** The structural and conceptual alignment is significant:
+
+| LGPD | GDPR | Alignment |
+|------|------|-----------|
+| Art. 7 (Bases legais) | Art. 6 (Lawful bases) | Direct structural parallel -- 10 LGPD bases align with GDPR's 6 |
+| Art. 18 (Direitos dos titulares) | Art. 15-22 (Data subject rights) | Right of access, rectification, deletion, portability |
+| Art. 37-39 (DPO / Encarregado) | Art. 37-39 (DPO) | Encarregado role mirrors DPO obligations |
+| Art. 46-51 (Segurança) | Art. 25, 32 (Data security) | Privacy by design + security measures |
+| Art. 52-54 (Sanções) | Art. 83-84 (Penalties) | ANPD fines up to 2% of revenue (cf. GDPR 4%) |
+| Art. 33-36 (Transferências internacionais) | Art. 44-49 (International transfers) | Adequacy decisions, standard clauses |
+
+The EU tools in this MCP reveal alignment between LGPD and GDPR provisions -- useful for multi-jurisdictional compliance work involving both Brazilian and EU data subjects.
+
+> **Note on adequacy:** Brazil does not yet have a formal EU adequacy decision (unlike Canada under PIPEDA). International data transfers from EU to Brazil require appropriate safeguards (SCCs, BCRs). Use the `validate_eu_compliance` tool to assess alignment for specific provisions.
+
+---
+
+## Why This Works
+
+**Verbatim Source Text (No LLM Processing):**
+- All statute text is ingested from lexml.gov.br and planalto.gov.br official sources
+- Provisions are returned **unchanged** from SQLite FTS5 database rows
+- Zero LLM summarization or paraphrasing -- the database contains law text, not AI interpretations
+
+**Smart Context Management:**
+- Search returns ranked provisions with BM25 scoring (safe for context)
+- Provision retrieval gives exact text by law number + article
+- Cross-references help navigate without loading everything at once
+
+**Technical Architecture:**
+```
+LexML / Planalto --> Parse --> SQLite --> FTS5 snippet() --> MCP response
+                       ^                        ^
+                Provision parser         Verbatim database query
+```
+
+### Traditional Research vs. This MCP
+
+| Abordagem Tradicional | Este Servidor MCP |
+|----------------------|-------------------|
+| Pesquisar no LexML por número de lei | Pesquisar em português: *"proteção dados pessoais consentimento"* |
+| Navegar manualmente em códigos multi-artigo | Obter a disposição exata com contexto |
+| Referências cruzadas manuais entre leis | `build_legal_stance` agrega de várias fontes |
+| "Esta lei ainda está em vigor?" -- verificar manualmente | Ferramenta `check_currency` -- resposta em segundos |
+| Comparar LGPD com GDPR -- verificar EUR-Lex manualmente | `get_eu_basis` -- alinhamento com GDPR instantaneamente |
+| Sem API, sem integração | Protocolo MCP -- nativo para IA |
+
+**Tradicional:** Pesquisar no Planalto --> Navegar no HTML --> Ctrl+F --> Verificar no Diário Oficial --> Cruzar com EUR-Lex para comparação LGPD/GDPR --> Repetir
+
+**Este MCP:** *"Quais são as bases legais para tratamento de dados pessoais na LGPD e como se comparam com o GDPR?"* --> Concluído.
 
 ---
 
@@ -176,56 +216,24 @@ The full database is larger due to the comprehensive scope of Brazilian federal 
 
 | Tool | Description |
 |------|-------------|
-| `search_legislation` | FTS5 full-text search across all provisions with BM25 ranking |
-| `get_provision` | Retrieve specific provision by statute + chapter/section |
-| `check_currency` | Check if statute is in force, amended, or repealed |
-| `validate_citation` | Validate citation against database (zero-hallucination check) |
-| `build_legal_stance` | Aggregate citations from statutes for a legal topic |
+| `search_legislation` | FTS5 full-text search across 28,585 provisions with BM25 ranking. Supports Brazilian Portuguese queries |
+| `get_provision` | Retrieve specific provision by law number + article (e.g., "Lei 13.709/2018" + "art. 7") |
+| `check_currency` | Check if a law is in force, amended, or repealed |
+| `validate_citation` | Validate citation against database -- zero-hallucination check |
+| `build_legal_stance` | Aggregate citations from multiple laws for a legal topic |
 | `format_citation` | Format citations per Brazilian conventions (full/short/pinpoint) |
-| `list_sources` | List all available statutes with metadata |
-| `about` | Server info, capabilities, and coverage summary |
+| `list_sources` | List all available laws with metadata, coverage scope, and data provenance |
+| `about` | Server info, capabilities, dataset statistics, and coverage summary |
 
-### EU/International Law Integration Tools (5)
+### EU Law Integration Tools (5)
 
 | Tool | Description |
 |------|-------------|
-| `get_eu_basis` | Get EU directives/regulations for Brazilian statute |
-| `get_brazilian_implementations` | Find Brazilian laws implementing EU act |
-| `search_eu_implementations` | Search EU documents with Brazilian implementation counts |
-| `get_provision_eu_basis` | Get EU law references for specific provision |
-| `validate_eu_compliance` | Check implementation status of EU directives |
-
----
-
-## Why This Works
-
-**Verbatim Source Text (No LLM Processing):**
-- All statute text is ingested from official Brazilian government sources
-- Provisions are returned **unchanged** from SQLite FTS5 database rows
-- Zero LLM summarization or paraphrasing -- the database contains regulation text, not AI interpretations
-
-**Smart Context Management:**
-- Search returns ranked provisions with BM25 scoring (safe for context)
-- Provision retrieval gives exact text by statute identifier + chapter/section
-- Cross-references help navigate without loading everything at once
-
-**Technical Architecture:**
-```
-Official Sources --> Parse --> SQLite --> FTS5 snippet() --> MCP response
-                     ^                       ^
-              Provision parser         Verbatim database query
-```
-
-### Traditional Research vs. This MCP
-
-| Traditional Approach | This MCP Server |
-|---------------------|-----------------|
-| Search official databases by statute number | Search by plain language |
-| Navigate multi-chapter statutes manually | Get the exact provision with context |
-| Manual cross-referencing between laws | `build_legal_stance` aggregates across sources |
-| "Is this statute still in force?" --> check manually | `check_currency` tool --> answer in seconds |
-| Find EU basis --> dig through EUR-Lex | `get_eu_basis` --> linked EU directives instantly |
-| No API, no integration | MCP protocol --> AI-native |
+| `get_eu_basis` | Get EU directives/regulations that a Brazilian law aligns with (e.g., LGPD-GDPR mapping) |
+| `get_brazilian_implementations` | Find Brazilian laws aligning with a specific EU act |
+| `search_eu_implementations` | Search EU documents with Brazilian alignment counts |
+| `get_provision_eu_basis` | Get EU law references for a specific provision |
+| `validate_eu_compliance` | Check alignment status of Brazilian laws against EU directives |
 
 ---
 
@@ -233,7 +241,30 @@ Official Sources --> Parse --> SQLite --> FTS5 snippet() --> MCP response
 
 All content is sourced from authoritative Brazilian legal databases:
 
-- **[Planalto](https://www.planalto.gov.br)** -- Official Brazilian government legal database
+- **[LexML Brasil](https://lexml.gov.br/)** -- Official Brazilian legal document repository (Presidência da República)
+- **[Planalto](https://www.planalto.gov.br/)** -- Presidential Portal, official consolidated federal legislation
+- **[Câmara dos Deputados](https://www.camara.leg.br/)** -- Chamber of Deputies legislative documents and preparatory works
+- **[Senado Federal](https://www.senado.leg.br/)** -- Federal Senate legislative records
+
+### Data Provenance
+
+| Field | Value |
+|-------|-------|
+| **Authority** | Presidência da República / LexML |
+| **Language** | Portuguese (Brazilian) |
+| **Coverage** | 2,471 federal laws across all legislative areas |
+| **Preparatory Works** | 116,256 parliamentary documents |
+| **Last ingested** | 2026-02-28 |
+
+### Automated Freshness Checks
+
+A GitHub Actions workflow monitors all data sources:
+
+| Check | Method |
+|-------|--------|
+| **Law amendments** | Drift detection against known provision anchors |
+| **New laws** | Comparison against LexML and Planalto index |
+| **Repealed laws** | Status change detection |
 
 **Verified data only** -- every citation is validated against official sources. Zero LLM-generated content.
 
@@ -262,11 +293,13 @@ See [SECURITY.md](SECURITY.md) for the full policy and vulnerability reporting.
 
 > **THIS TOOL IS NOT LEGAL ADVICE**
 >
-> Statute text is sourced from official Brazilian government publications. However:
+> Statute text is sourced from LexML (Presidência da República) and Planalto. However:
 > - This is a **research tool**, not a substitute for professional legal counsel
-> - **Court case coverage is limited** -- do not rely solely on this for case law research
-> - **Verify critical citations** against primary sources for court filings
-> - **EU cross-references** are extracted from statute text, not EUR-Lex full text
+> - **Court case coverage is not included** -- do not rely solely on this for jurisprudência
+> - **Verify critical citations** against primary sources for official proceedings
+> - **EU cross-references** reflect alignment relationships; Brazil does not yet have EU adequacy status
+> - **State-level legislation is not included** -- this covers federal Acts only
+> - For professional legal advice in Brazil, consult a member of the **Ordem dos Advogados do Brasil (OAB)**
 
 **Before using professionally, read:** [DISCLAIMER.md](DISCLAIMER.md) | [SECURITY.md](SECURITY.md)
 
@@ -281,8 +314,8 @@ Queries go through the Claude API. For privileged or confidential matters, use o
 ### Setup
 
 ```bash
-git clone https://github.com/Ansvar-Systems/Brazil-law-mcp
-cd Brazil-law-mcp
+git clone https://github.com/Ansvar-Systems/brazil-law-mcp
+cd brazil-law-mcp
 npm install
 npm run build
 npm test
@@ -295,6 +328,20 @@ npm run dev                                       # Start MCP server
 npx @anthropic/mcp-inspector node dist/index.js   # Test with MCP Inspector
 ```
 
+### Data Management
+
+```bash
+npm run ingest              # Ingest laws from LexML/Planalto
+npm run build:db            # Rebuild SQLite database
+npm run check-updates       # Check for amendments and new laws
+```
+
+### Performance
+
+- **Search Speed:** <100ms for most FTS5 queries
+- **Database Size:** ~50 MB (efficient, portable)
+- **Reliability:** 100% ingestion success rate across 2,471 Acts
+
 ---
 
 ## Related Projects: Complete Compliance Suite
@@ -302,18 +349,15 @@ npx @anthropic/mcp-inspector node dist/index.js   # Test with MCP Inspector
 This server is part of **Ansvar's Compliance Suite** -- MCP servers that work together for end-to-end compliance coverage:
 
 ### [@ansvar/eu-regulations-mcp](https://github.com/Ansvar-Systems/EU_compliance_MCP)
-**Query 49 EU regulations directly from Claude** -- GDPR, AI Act, DORA, NIS2, MiFID II, eIDAS, and more. Full regulatory text with article-level search. `npx @ansvar/eu-regulations-mcp`
-
-### [@ansvar/us-regulations-mcp](https://github.com/Ansvar-Systems/US_Compliance_MCP)
-**Query US federal and state compliance laws** -- HIPAA, CCPA, SOX, GLBA, FERPA, and more. `npx @ansvar/us-regulations-mcp`
+**Query 49 EU regulations directly from Claude** -- GDPR, AI Act, DORA, NIS2, MiFID II, eIDAS, and more. Pair with this server for LGPD-GDPR alignment analysis. `npx @ansvar/eu-regulations-mcp`
 
 ### [@ansvar/security-controls-mcp](https://github.com/Ansvar-Systems/security-controls-mcp)
 **Query 261 security frameworks** -- ISO 27001, NIST CSF, SOC 2, CIS Controls, SCF, and more. `npx @ansvar/security-controls-mcp`
 
-### [@ansvar/automotive-cybersecurity-mcp](https://github.com/Ansvar-Systems/Automotive-MCP)
-**Query UNECE R155/R156 and ISO 21434** -- Automotive cybersecurity compliance. `npx @ansvar/automotive-cybersecurity-mcp`
+### [@ansvar/sanctions-mcp](https://github.com/Ansvar-Systems/Sanctions-MCP)
+**Offline-capable sanctions screening** -- OFAC, EU, UN sanctions lists. `pip install ansvar-sanctions-mcp`
 
-**30+ national law MCPs** covering Australia, Brazil, Canada, China, Denmark, Finland, France, Germany, Ghana, Iceland, India, Ireland, Israel, Italy, Japan, Kenya, Netherlands, Nigeria, Norway, Singapore, Slovenia, South Korea, Sweden, Switzerland, Thailand, UAE, UK, and more.
+**70+ national law MCPs** covering Australia, Brazil, Canada, China, Denmark, Finland, France, Germany, Ghana, Iceland, India, Ireland, Israel, Italy, Japan, Kenya, Netherlands, Nigeria, Norway, Singapore, Slovenia, South Korea, Sweden, Switzerland, Thailand, UAE, UK, and more.
 
 ---
 
@@ -322,23 +366,26 @@ This server is part of **Ansvar's Compliance Suite** -- MCP servers that work to
 Contributions welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 Priority areas:
-- Court case law expansion
-- EU cross-reference improvements
-- Historical statute versions and amendment tracking
-- Additional statutory instruments and regulations
+- Court case law expansion (STF, STJ jurisprudência)
+- ANPD guidance documents and resolutions
+- State-level privacy law summaries
+- Historical law versions and amendment tracking
+- Regulatory agency (ANATEL, BACEN, CVM) instruments
 
 ---
 
 ## Roadmap
 
-- [x] Core statute database with FTS5 search
-- [x] EU/international law cross-references
+- [x] Core law database with FTS5 search
+- [x] Full corpus ingestion (2,471 laws, 28,585 provisions)
+- [x] Preparatory works (116,256 parliamentary documents)
+- [x] EU/LGPD-GDPR alignment tools
 - [x] Vercel Streamable HTTP deployment
 - [x] npm package publication
-- [ ] Court case law expansion
-- [ ] Historical statute versions (amendment tracking)
-- [ ] Preparatory works / explanatory memoranda
-- [ ] Lower court and tribunal decisions
+- [ ] Court case law expansion (STF, STJ)
+- [ ] ANPD resolution and guidance coverage
+- [ ] Historical law versions (amendment tracking)
+- [ ] State-level legislation
 
 ---
 
@@ -347,12 +394,12 @@ Priority areas:
 If you use this MCP server in academic research:
 
 ```bibtex
-@software{brazil_law_mcp_2025,
+@software{brazil_law_mcp_2026,
   author = {Ansvar Systems AB},
   title = {Brazilian Law MCP Server: AI-Powered Legal Research Tool},
-  year = {2025},
-  url = {https://github.com/Ansvar-Systems/Brazil-law-mcp},
-  note = {Brazilian legal database with full-text search and EU cross-references}
+  year = {2026},
+  url = {https://github.com/Ansvar-Systems/brazil-law-mcp},
+  note = {2,471 Brazilian federal laws with 28,585 provisions and 116,256 preparatory works documents}
 }
 ```
 
@@ -364,16 +411,17 @@ Apache License 2.0. See [LICENSE](./LICENSE) for details.
 
 ### Data Licenses
 
-- **Statutes & Legislation:** Brazilian Government (public domain)
+- **Statutes & Legislation:** Presidência da República / LexML (public domain)
+- **Preparatory Works:** Câmara dos Deputados / Senado Federal (public domain)
 - **EU Metadata:** EUR-Lex (EU public domain)
 
 ---
 
 ## About Ansvar Systems
 
-We build AI-accelerated compliance and legal research tools for the global market. This MCP server started as our internal reference tool -- turns out everyone building compliance tools has the same research frustrations.
+We build AI-accelerated compliance and legal research tools for the global market. This MCP server started as our internal reference tool for Brazilian legal research -- turns out everyone building compliance tools across Brazil and EU jurisdictions has the same research frustrations.
 
-So we're open-sourcing it.
+So we're open-sourcing it. Navigating 2,471 federal laws and mapping LGPD to GDPR shouldn't require hours of manual cross-referencing.
 
 **[ansvar.eu](https://ansvar.eu)** -- Stockholm, Sweden
 
