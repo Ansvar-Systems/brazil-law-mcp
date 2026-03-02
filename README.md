@@ -7,8 +7,8 @@
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![GitHub stars](https://img.shields.io/github/stars/Ansvar-Systems/brazil-law-mcp?style=social)](https://github.com/Ansvar-Systems/brazil-law-mcp)
 [![CI](https://github.com/Ansvar-Systems/brazil-law-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/Ansvar-Systems/brazil-law-mcp/actions/workflows/ci.yml)
-[![Database](https://img.shields.io/badge/database-pre--built-green)](docs/EU_INTEGRATION_GUIDE.md)
-[![Provisions](https://img.shields.io/badge/provisions-28%2C585-blue)](docs/EU_INTEGRATION_GUIDE.md)
+[![Database](https://img.shields.io/badge/database-pre--built-green)](https://github.com/Ansvar-Systems/brazil-law-mcp)
+[![Provisions](https://img.shields.io/badge/provisions-28%2C585-blue)](https://github.com/Ansvar-Systems/brazil-law-mcp)
 
 Pesquise **2.471 leis federais brasileiras** -- da LGPD (Lei Geral de Proteção de Dados) e o Marco Civil da Internet ao Código Penal, Código Civil e a CLT (Consolidação das Leis do Trabalho) -- diretamente do Claude, Cursor ou qualquer cliente compatível com MCP.
 
