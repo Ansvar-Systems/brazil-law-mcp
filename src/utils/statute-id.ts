@@ -1,129 +1,232 @@
 /**
- * Brazilian statute identifier handling.
+ * Statute ID resolution for Brazil Law MCP.
  *
- * Brazilian laws are identified by type-number-year, e.g. "lei-13709-2018" (LGPD).
- * Types: lei (ordinary law), lc (complementary law), mp (medida provisoria), decreto (decree).
- *
- * Also supports lookup by common short names: LGPD, Marco Civil, CDC, etc.
+ * 9-step resolution cascade with shortest-match ranking.
+ * Resolves fuzzy document references (titles, Act names, chapter numbers)
+ * to database document IDs.
  */
 
-import type { Database } from '@ansvar/mcp-sqlite';
+import type Database from '@ansvar/mcp-sqlite';
 
-/** Well-known short names for Brazilian legislation */
-const SHORT_NAME_MAP: Record<string, string> = {
-  'lgpd': 'lei-13709-2018',
-  'marco civil': 'lei-12965-2014',
-  'marco civil da internet': 'lei-12965-2014',
-  'carolina dieckmann': 'lei-12737-2012',
-  'lei carolina dieckmann': 'lei-12737-2012',
-  'cdc': 'lei-8078-1990',
-  'codigo de defesa do consumidor': 'lei-8078-1990',
-  'codigo civil': 'lei-10406-2002',
-  'lei geral de telecomunicacoes': 'lei-9472-1997',
-  'lgt': 'lei-9472-1997',
-  'constituicao': 'constituicao-1988',
-  'constituicao federal': 'constituicao-1988',
-  'cf': 'constituicao-1988',
-  'cf/88': 'constituicao-1988',
+// ---------------------------------------------------------------------------
+// Types
+// ---------------------------------------------------------------------------
+
+type Db = InstanceType<typeof Database>;
+
+interface DocRow {
+  id: string;
+  title: string;
+  short_name: string | null;
+}
+
+// ---------------------------------------------------------------------------
+// Abbreviation map (Step 2) — add entries as needed
+// ---------------------------------------------------------------------------
+
+const ABBREVIATIONS: Record<string, string> = {
+  // Example: 'DPA': 'data-protection-act-2019',
 };
 
+// ---------------------------------------------------------------------------
+// Caches (lazy singletons, reset per test run)
+// ---------------------------------------------------------------------------
+
+let allDocsCache: DocRow[] | null = null;
+let chapterLookup: Map<string, string> | null = null;
+
+/** Reset caches — exported for test teardown. */
+export function resetCaches(): void {
+  allDocsCache = null;
+  chapterLookup = null;
+}
+
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
 /**
- * Normalize a "Lei nnn/yyyy" or "Lei n. nnn/yyyy" style reference into
- * the internal ID format "lei-nnn-yyyy".
+ * Normalise "Act YYYY" to "Act, YYYY" — Brazil statutes store the comma form.
+ * Only adds a comma when one is not already present.
  */
-function normalizeReference(input: string): string | null {
-  // Handle "Lei nº 13.709, de 14 de agosto de 2018" or "Lei 13.709/2018"
-  const fullMatch = input.match(
-    /^(lei|lc|mp|decreto)\s+(?:n[ºo.]?\s*)?(\d[\d.]*)\s*(?:\/|,\s*de\s+\d{1,2}\s+de\s+\w+\s+de\s+)(\d{4})/i
-  );
-  if (fullMatch) {
-    const type = fullMatch[1].toLowerCase();
-    const number = fullMatch[2].replace(/\./g, '');
-    const year = fullMatch[3];
-    return `${type}-${number}-${year}`;
+function normalizeActTitle(input: string): string {
+  return input.replace(/\bAct\s+(?!,)(\d{4})\b/gi, 'Act, $1');
+}
+
+/**
+ * Strip punctuation characters and collapse whitespace.
+ * Used for the final punctuation-normalized fallback scan.
+ */
+function normalizePunctuation(s: string): string {
+  return s.replace(/[,;:.()[\]]/g, '').replace(/\s+/g, ' ').trim();
+}
+
+/**
+ * Load all documents into the in-memory cache (lazy, once per process).
+ */
+function getAllDocs(db: Db): DocRow[] {
+  if (!allDocsCache) {
+    allDocsCache = db.prepare(
+      'SELECT id, title, short_name FROM legal_documents',
+    ).all() as DocRow[];
+  }
+  return allDocsCache;
+}
+
+/**
+ * Build a chapter-number → document_id map from s1 provision content.
+ * Parses patterns like "[Chapter 39]" or "[Chapter 39:2]".
+ */
+function getChapterLookup(db: Db): Map<string, string> {
+  if (!chapterLookup) {
+    chapterLookup = new Map();
+    const rows = db.prepare(
+      "SELECT document_id, content FROM legal_provisions WHERE provision_ref = 's1' AND content LIKE '%[Chapter %'",
+    ).all() as { document_id: string; content: string }[];
+
+    for (const row of rows) {
+      const match = row.content.match(/\[Chapter\s+(\d+[:\d]*)\]/);
+      if (match?.[1]) {
+        chapterLookup.set(match[1], row.document_id);
+      }
+    }
+  }
+  return chapterLookup;
+}
+
+// ---------------------------------------------------------------------------
+// Main resolution function — 9-step cascade
+// ---------------------------------------------------------------------------
+
+/**
+ * Resolve a document identifier to a database document ID.
+ *
+ * Steps:
+ * 1. Direct ID match
+ * 2. Abbreviation map
+ * 3. Chapter number lookup
+ * 4. Exact title match (case-insensitive), then with trailing year stripped
+ * 5. Shortest LIKE match on title
+ * 6. Case-insensitive shortest LIKE on title
+ * 7. Short-name LIKE (case-insensitive)
+ * 8. Punctuation-normalized full scan (shortest match)
+ * 9. Return null
+ */
+export function resolveDocumentId(
+  db: Db,
+  input: string,
+): string | null {
+  const trimmed = input.trim();
+  if (!trimmed) return null;
+
+  // -----------------------------------------------------------------------
+  // Step 1 — Direct ID match
+  // -----------------------------------------------------------------------
+  const directMatch = db.prepare(
+    'SELECT id FROM legal_documents WHERE id = ?',
+  ).get(trimmed) as { id: string } | undefined;
+  if (directMatch) return directMatch.id;
+
+  // -----------------------------------------------------------------------
+  // Step 2 — Abbreviation map
+  // -----------------------------------------------------------------------
+  const abbrev = ABBREVIATIONS[trimmed] ?? ABBREVIATIONS[trimmed.toUpperCase()];
+  if (abbrev) return abbrev;
+
+  // -----------------------------------------------------------------------
+  // Step 3 — Chapter number lookup (e.g., "Cap 39", "Chapter 486")
+  // -----------------------------------------------------------------------
+  const chapMatch = trimmed.match(/^(?:Cap(?:\.?\s*| )|(Chapter)\s*)(\d+[:\d]*)$/i);
+  if (chapMatch?.[2]) {
+    const lookup = getChapterLookup(db);
+    const chapResult = lookup.get(chapMatch[2]);
+    if (chapResult) return chapResult;
   }
 
-  // Handle "Lei 13.709/2018" shorthand
-  const shortMatch = input.match(
-    /^(lei|lc|mp|decreto)\s+(?:n[ºo.]?\s*)?(\d[\d.]*)\s*\/\s*(\d{4})/i
-  );
-  if (shortMatch) {
-    const type = shortMatch[1].toLowerCase();
-    const number = shortMatch[2].replace(/\./g, '');
-    const year = shortMatch[3];
-    return `${type}-${number}-${year}`;
+  // -----------------------------------------------------------------------
+  // Step 4 — Exact title match (case-insensitive)
+  // -----------------------------------------------------------------------
+  const normalized = normalizeActTitle(trimmed);
+
+  // 4a: exact match on normalised input
+  const exactTitle = db.prepare(
+    'SELECT id FROM legal_documents WHERE LOWER(title) = LOWER(?)',
+  ).get(normalized) as { id: string } | undefined;
+  if (exactTitle) return exactTitle.id;
+
+  // 4b: try with trailing year stripped from stored titles
+  //     e.g. input "Data Protection Act" should match "Data Protection Act, 2019"
+  const docs = getAllDocs(db);
+  const lowerNormalized = normalized.toLowerCase();
+  for (const doc of docs) {
+    const storedBase = doc.title.replace(/,?\s*\d{4}\s*$/, '').toLowerCase();
+    if (storedBase === lowerNormalized) return doc.id;
   }
 
+  // -----------------------------------------------------------------------
+  // Step 5 — Shortest LIKE match (case-sensitive on title)
+  // -----------------------------------------------------------------------
+  const likeMatches = docs.filter(d => d.title.includes(normalized));
+  if (likeMatches.length > 0) {
+    likeMatches.sort((a, b) => a.title.length - b.title.length);
+    return likeMatches[0]!.id;
+  }
+
+  // -----------------------------------------------------------------------
+  // Step 6 — Case-insensitive shortest LIKE on title
+  // -----------------------------------------------------------------------
+  const lowerLikeMatches = docs.filter(
+    d => d.title.toLowerCase().includes(lowerNormalized),
+  );
+  if (lowerLikeMatches.length > 0) {
+    lowerLikeMatches.sort((a, b) => a.title.length - b.title.length);
+    return lowerLikeMatches[0]!.id;
+  }
+
+  // -----------------------------------------------------------------------
+  // Step 7 — Short-name LIKE (case-insensitive)
+  // -----------------------------------------------------------------------
+  const shortNameMatches = docs.filter(
+    d => d.short_name && d.short_name.toLowerCase().includes(lowerNormalized),
+  );
+  if (shortNameMatches.length > 0) {
+    shortNameMatches.sort((a, b) => (a.title?.length ?? 0) - (b.title?.length ?? 0));
+    return shortNameMatches[0]!.id;
+  }
+
+  // -----------------------------------------------------------------------
+  // Step 8 — Punctuation-normalized full scan (shortest match)
+  // -----------------------------------------------------------------------
+  const puncNormalized = normalizePunctuation(lowerNormalized);
+  const puncMatches = docs.filter(d => {
+    const puncTitle = normalizePunctuation(d.title.toLowerCase());
+    return puncTitle.includes(puncNormalized);
+  });
+  if (puncMatches.length > 0) {
+    puncMatches.sort((a, b) => a.title.length - b.title.length);
+    return puncMatches[0]!.id;
+  }
+
+  // -----------------------------------------------------------------------
+  // Step 9 — No match
+  // -----------------------------------------------------------------------
   return null;
 }
 
-export function isValidStatuteId(id: string): boolean {
-  return id.length > 0 && id.trim().length > 0;
+// ---------------------------------------------------------------------------
+// Legacy compatibility — some repos import these older function names.
+// ---------------------------------------------------------------------------
+
+/** @deprecated Use resolveDocumentId instead. */
+export const resolveExistingStatuteId = resolveDocumentId;
+
+/** @deprecated Use resolveDocumentId(db, id) !== null instead. */
+export function isValidStatuteId(db: Db, id: string): boolean {
+  return resolveDocumentId(db, id) !== null;
 }
 
-export function statuteIdCandidates(id: string): string[] {
-  const trimmed = id.trim().toLowerCase();
-  const candidates = new Set<string>();
-  candidates.add(trimmed);
-  candidates.add(id.trim());
-
-  // Check short name map
-  const mapped = SHORT_NAME_MAP[trimmed];
-  if (mapped) {
-    candidates.add(mapped);
-  }
-
-  // Try normalizing reference notation
-  const normalized = normalizeReference(id.trim());
-  if (normalized) {
-    candidates.add(normalized);
-  }
-
-  // Convert spaces/dashes
-  if (trimmed.includes(' ')) {
-    candidates.add(trimmed.replace(/\s+/g, '-'));
-  }
-  if (trimmed.includes('-')) {
-    candidates.add(trimmed.replace(/-/g, ' '));
-  }
-
-  return [...candidates];
-}
-
-export function resolveExistingStatuteId(
-  db: Database,
-  inputId: string,
-): string | null {
-  // Try exact match first
-  const exact = db.prepare(
-    "SELECT id FROM legal_documents WHERE id = ? LIMIT 1"
-  ).get(inputId) as { id: string } | undefined;
-
-  if (exact) return exact.id;
-
-  // Try short name map
-  const lower = inputId.trim().toLowerCase();
-  const mapped = SHORT_NAME_MAP[lower];
-  if (mapped) {
-    const fromMap = db.prepare(
-      "SELECT id FROM legal_documents WHERE id = ? LIMIT 1"
-    ).get(mapped) as { id: string } | undefined;
-    if (fromMap) return fromMap.id;
-  }
-
-  // Try normalizing reference notation
-  const normalized = normalizeReference(inputId.trim());
-  if (normalized) {
-    const fromNorm = db.prepare(
-      "SELECT id FROM legal_documents WHERE id = ? LIMIT 1"
-    ).get(normalized) as { id: string } | undefined;
-    if (fromNorm) return fromNorm.id;
-  }
-
-  // Try LIKE match on title
-  const byTitle = db.prepare(
-    "SELECT id FROM legal_documents WHERE title LIKE ? LIMIT 1"
-  ).get(`%${inputId}%`) as { id: string } | undefined;
-
-  return byTitle?.id ?? null;
+/** @deprecated Return candidate IDs for a query (compat shim). */
+export function statuteIdCandidates(db: Db, input: string): string[] {
+  const resolved = resolveDocumentId(db, input);
+  return resolved ? [resolved] : [];
 }
