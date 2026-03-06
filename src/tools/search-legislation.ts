@@ -5,6 +5,7 @@
 import type { Database } from '@ansvar/mcp-sqlite';
 import { buildFtsQueryVariants } from '../utils/fts-query.js';
 import { normalizeAsOfDate } from '../utils/as-of-date.js';
+import { resolveExistingStatuteId } from '../utils/statute-id.js';
 import { generateResponseMetadata, type ToolResponse } from '../utils/metadata.js';
 
 export interface SearchLegislationInput {
@@ -41,8 +42,25 @@ export async function searchLegislation(
   }
 
   const limit = Math.min(Math.max(input.limit ?? DEFAULT_LIMIT, 1), MAX_LIMIT);
+  const fetchLimit = limit * 2;
   const queryVariants = buildFtsQueryVariants(input.query);
   if (input.as_of_date) normalizeAsOfDate(input.as_of_date);
+
+  // Resolve document_id from title if provided
+  let resolvedDocId: string | undefined;
+  if (input.document_id) {
+    const resolved = resolveExistingStatuteId(db, input.document_id);
+    resolvedDocId = resolved ?? undefined;
+    if (!resolved) {
+      return {
+        results: [],
+        _metadata: {
+          ...generateResponseMetadata(db),
+          note: `No document found matching "${input.document_id}"`,
+        },
+      };
+    }
+  }
 
   let sql = `
     SELECT
@@ -62,9 +80,9 @@ export async function searchLegislation(
 
   const params: (string | number)[] = [];
 
-  if (input.document_id) {
+  if (resolvedDocId) {
     sql += ` AND lp.document_id = ?`;
-    params.push(input.document_id);
+    params.push(resolvedDocId);
   }
 
   if (input.status) {
@@ -73,7 +91,7 @@ export async function searchLegislation(
   }
 
   sql += ` ORDER BY relevance LIMIT ?`;
-  params.push(limit);
+  params.push(fetchLimit);
 
   const runQuery = (ftsQuery: string): SearchLegislationResult[] => {
     const bound = [ftsQuery, ...params];
@@ -81,12 +99,46 @@ export async function searchLegislation(
   };
 
   const primaryResults = runQuery(queryVariants.primary);
-  const results = (primaryResults.length > 0 || !queryVariants.fallback)
-    ? primaryResults
-    : runQuery(queryVariants.fallback);
+  if (primaryResults.length > 0) {
+    return {
+      results: deduplicateResults(primaryResults, limit),
+      _metadata: generateResponseMetadata(db),
+    };
+  }
 
-  return {
-    results,
-    _metadata: generateResponseMetadata(db)
-  };
+  if (queryVariants.fallback) {
+    const fallbackResults = runQuery(queryVariants.fallback);
+    if (fallbackResults.length > 0) {
+      return {
+        results: deduplicateResults(fallbackResults, limit),
+        _metadata: {
+          ...generateResponseMetadata(db),
+          query_strategy: 'broadened',
+        },
+      };
+    }
+  }
+
+  return { results: [], _metadata: generateResponseMetadata(db) };
+}
+
+/**
+ * Deduplicate search results by document_title + provision_ref.
+ * Duplicate document IDs (numeric vs slug) cause the same provision to appear twice.
+ * Keeps the first (highest-ranked) occurrence.
+ */
+function deduplicateResults(
+  rows: SearchLegislationResult[],
+  limit: number,
+): SearchLegislationResult[] {
+  const seen = new Set<string>();
+  const deduped: SearchLegislationResult[] = [];
+  for (const row of rows) {
+    const key = `${row.document_title}::${row.provision_ref}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    deduped.push(row);
+    if (deduped.length >= limit) break;
+  }
+  return deduped;
 }
