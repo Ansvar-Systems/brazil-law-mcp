@@ -4,6 +4,7 @@
 
 import type { Database } from '@ansvar/mcp-sqlite';
 import { buildFtsQueryVariants } from '../utils/fts-query.js';
+import { resolveExistingStatuteId } from '../utils/statute-id.js';
 import { generateResponseMetadata, type ToolResponse } from '../utils/metadata.js';
 
 export interface BuildLegalStanceInput {
@@ -42,7 +43,24 @@ export async function buildLegalStance(
   }
 
   const limit = Math.min(Math.max(input.limit ?? DEFAULT_LIMIT, 1), MAX_LIMIT);
+  const fetchLimit = limit * 2;
   const queryVariants = buildFtsQueryVariants(input.query);
+
+  // Resolve document_id from title if provided
+  let resolvedDocId: string | undefined;
+  if (input.document_id) {
+    const resolved = resolveExistingStatuteId(db, input.document_id);
+    resolvedDocId = resolved ?? undefined;
+    if (!resolved) {
+      return {
+        results: { query: input.query, provisions: [], total_citations: 0 },
+        _metadata: {
+          ...generateResponseMetadata(db),
+          note: `No document found matching "${input.document_id}"`,
+        },
+      };
+    }
+  }
 
   let provSql = `
     SELECT
@@ -60,13 +78,13 @@ export async function buildLegalStance(
 
   const provParams: (string | number)[] = [];
 
-  if (input.document_id) {
+  if (resolvedDocId) {
     provSql += ` AND lp.document_id = ?`;
-    provParams.push(input.document_id);
+    provParams.push(resolvedDocId);
   }
 
   provSql += ` ORDER BY relevance LIMIT ?`;
-  provParams.push(limit);
+  provParams.push(fetchLimit);
 
   const runProvisionQuery = (ftsQuery: string): ProvisionHit[] => {
     const bound = [ftsQuery, ...provParams];
@@ -74,16 +92,46 @@ export async function buildLegalStance(
   };
 
   let provisions = runProvisionQuery(queryVariants.primary);
+  let queryStrategy: string | undefined;
+
   if (provisions.length === 0 && queryVariants.fallback) {
     provisions = runProvisionQuery(queryVariants.fallback);
+    if (provisions.length > 0) {
+      queryStrategy = 'broadened';
+    }
   }
+
+  const deduped = deduplicateResults(provisions, limit);
 
   return {
     results: {
       query: input.query,
-      provisions,
-      total_citations: provisions.length,
+      provisions: deduped,
+      total_citations: deduped.length,
     },
-    _metadata: generateResponseMetadata(db)
+    _metadata: {
+      ...generateResponseMetadata(db),
+      ...(queryStrategy ? { query_strategy: queryStrategy } : {}),
+    },
   };
+}
+
+/**
+ * Deduplicate results by document_title + provision_ref.
+ * Duplicate document IDs (numeric vs slug) cause the same provision to appear twice.
+ */
+function deduplicateResults(
+  rows: ProvisionHit[],
+  limit: number,
+): ProvisionHit[] {
+  const seen = new Set<string>();
+  const deduped: ProvisionHit[] = [];
+  for (const row of rows) {
+    const key = `${row.document_title}::${row.provision_ref}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    deduped.push(row);
+    if (deduped.length >= limit) break;
+  }
+  return deduped;
 }

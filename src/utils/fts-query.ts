@@ -22,7 +22,10 @@ export interface FtsQueryVariants {
  * (including Portuguese diacritics: ã, õ, ç, é, ê, á, â, í, ó, ô, ú, ü).
  */
 function sanitiseToken(token: string): string {
-  return token.replace(/[^\p{L}\p{N}_-]/gu, '');
+  // Preserve trailing * for FTS5 prefix search
+  const hasStar = token.endsWith('*');
+  const cleaned = token.replace(/[^\p{L}\p{N}_-]/gu, '');
+  return hasStar && cleaned.length > 0 ? `${cleaned}*` : cleaned;
 }
 
 export function buildFtsQueryVariants(query: string): FtsQueryVariants {
