@@ -1,21 +1,36 @@
+<<<<<<< HEAD
 # Coverage Index -- Brazil Law MCP
 
 > Auto-generated from census data. Do not edit manually.
 > Generated: 2026-02-27
+=======
+# Coverage Index — Brazil Law MCP
+
+> Auto-generated from census data. Do not edit manually.
+> Generated: 2026-03-06
+>>>>>>> origin/dev
 
 ## Source
 
 | Field | Value |
 |-------|-------|
+<<<<<<< HEAD
 | Authority | Presidency of the Republic of Brazil (Presidencia da Republica) |
 | Portal | [www.planalto.gov.br/ccivil_03](https://www.planalto.gov.br/ccivil_03/) |
 | License | Brazilian Government Public Domain |
 | Census date | 2026-02-24 |
+=======
+| Authority | Presidência da República do Brasil |
+| Portal | [https://www.planalto.gov.br](https://www.planalto.gov.br) |
+| License | Brazilian Government Public Domain |
+| Census date | 2026-03-06 |
+>>>>>>> origin/dev
 
 ## Summary
 
 | Metric | Count |
 |--------|-------|
+<<<<<<< HEAD
 | Total laws enumerated | 2,471 |
 | Ingestable | 2,471 |
 | Ingested | 2,471 |
@@ -2498,3 +2513,21 @@
 | Lei 9722 |  |  | 0 |
 | Lei 9723 |  |  | 0 |
 | Lei 9996 |  |  | 0 |
+=======
+| Total laws enumerated | 6 |
+| Ingestable | 6 |
+| Ingested | 6 |
+| Excluded | 0 |
+| **Coverage** | **100%** |
+
+## Laws (6 ingested)
+
+| Title | Official URL | Status | Provisions |
+|-------|-------------|--------|------------|
+| Codigo Civil |  |  | 12 |
+| Lei de Crimes Ciberneticos (Carolina Dieckmann) |  |  | 5 |
+| Marco Civil da Internet |  |  | 12 |
+| Lei Geral de Protecao de Dados Pessoais (LGPD) |  |  | 16 |
+| Codigo de Defesa do Consumidor |  |  | 10 |
+| Lei Geral de Telecomunicacoes |  |  | 10 |
+>>>>>>> origin/dev
