@@ -67,7 +67,7 @@ const SCHEMA = `
 -- Legal documents (Brazilian federal laws)
 CREATE TABLE legal_documents (
   id TEXT PRIMARY KEY,
-  type TEXT NOT NULL CHECK(type IN ('lei', 'lc', 'mp', 'decreto', 'constituicao')),
+  type TEXT NOT NULL CHECK(type IN ('lei', 'lc', 'dl', 'mp', 'decreto', 'constituicao')),
   title TEXT NOT NULL,
   title_en TEXT,
   short_name TEXT,
