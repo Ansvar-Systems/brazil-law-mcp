@@ -38,12 +38,12 @@ Este servidor MCP torna o direito brasileiro **consultável, referenciável e le
 
 > Connect directly to the hosted version -- zero dependencies, nothing to install.
 
-**Endpoint:** `https://mcp.ansvar.eu/law-brazil-law-mcp/mcp`
+**Endpoint:** `https://mcp.ansvar.eu/law-br/mcp`
 
 | Client | How to Connect |
 |--------|---------------|
 | **Claude.ai** | Settings > Connectors > Add Integration > paste URL |
-| **Claude Code** | `claude mcp add brazil-law --transport http https://mcp.ansvar.eu/law-brazil-law-mcp/mcp` |
+| **Claude Code** | `claude mcp add brazil-law --transport http https://mcp.ansvar.eu/law-br/mcp` |
 | **Claude Desktop** | Add to config (see below) |
 | **GitHub Copilot** | Add to VS Code settings (see below) |
 
@@ -54,7 +54,7 @@ Este servidor MCP torna o direito brasileiro **consultável, referenciável e le
   "mcpServers": {
     "brazil-law": {
       "type": "url",
-      "url": "https://mcp.ansvar.eu/law-brazil-law-mcp/mcp"
+      "url": "https://mcp.ansvar.eu/law-br/mcp"
     }
   }
 }
@@ -67,7 +67,7 @@ Este servidor MCP torna o direito brasileiro **consultável, referenciável e le
   "github.copilot.chat.mcp.servers": {
     "brazil-law": {
       "type": "http",
-      "url": "https://mcp.ansvar.eu/law-brazil-law-mcp/mcp"
+      "url": "https://mcp.ansvar.eu/law-br/mcp"
     }
   }
 }
