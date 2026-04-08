@@ -129,9 +129,9 @@
       "id": "br-009",
       "category": "eu_cross_reference",
       "description": "LGPD cross-reference to EU GDPR -- LGPD was modeled on GDPR with similar principles and rights",
-      "tool": "get_provision_eu_basis",
+      "tool": "get_eu_basis",
       "input": {
-        "law_identifier": "Lei 13.709/2018"
+        "document_id": "lei-13709-2018"
       },
       "assertions": {
         "result_not_empty": true,
@@ -142,9 +142,9 @@
       "id": "br-010",
       "category": "eu_cross_reference",
       "description": "Marco Civil da Internet cross-reference to EU ePrivacy and net neutrality frameworks",
-      "tool": "get_provision_eu_basis",
+      "tool": "get_eu_basis",
       "input": {
-        "law_identifier": "Lei 12.965/2014"
+        "document_id": "lei-12965-2014"
       },
       "assertions": {
         "result_not_empty": true,
