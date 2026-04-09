@@ -63,7 +63,7 @@
     "@vitest/coverage-v8": "^4.0.18",
     "better-sqlite3": "^12.6.2",
     "cheerio": "^1.0.0",
-    "fast-xml-parser": "^5.3.5",
+    "fast-xml-parser": "^5.5.7",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
     "vitest": "^4.0.18"
@@ -78,8 +78,11 @@
     "access": "public"
   },
   "overrides": {
-    "path-to-regexp": "^8.0.0",
-    "undici": "^7.0.0",
+    "path-to-regexp": "^8.4.0",
+    "undici": "^7.24.0",
+    "hono": "^4.12.7",
+    "minimatch": "^10.2.3",
+    "smol-toml": "^1.6.1",
     "ajv": "^8.18.0"
   }
 }
