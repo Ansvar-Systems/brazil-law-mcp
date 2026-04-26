@@ -44,7 +44,10 @@ async function tryFetch(url: string): Promise<{ ok: boolean; body: string }> {
     });
     clearTimeout(timeout);
     if (res.status !== 200) return { ok: false, body: '' };
-    const body = await res.text();
+    // planalto.gov.br serves HTML as ISO-8859-1/Windows-1252 without charset header.
+    // Node fetch defaults to UTF-8, corrupting all Portuguese diacritics (ã,é,ç,ó → U+FFFD).
+    const buf = await res.arrayBuffer();
+    const body = new TextDecoder('windows-1252').decode(buf);
     return { ok: body.length > 500, body };
   } catch {
     return { ok: false, body: '' };
@@ -91,6 +94,23 @@ function buildCandidates(args: CliArgs): LawCandidate[] {
     }
   }
 
+  // ── Decretos-Lei (DL 1-5500) ──
+  // Covers Criminal Code (DL 2.848/1940), Penal Procedure Code (DL 3.689/1941),
+  // CLT (DL 5.452/1943), and other foundational pre-1988 legislation.
+  // Planalto URLs: /ccivil_03/decreto-lei/delNNNN.htm or delNNNNcompilado.htm
+  if (args.lawType === 'all' || args.lawType === 'dl') {
+    for (let n = 1; n <= 5500; n++) {
+      candidates.push({
+        type: 'dl', number: n, year: 0,
+        urls: [
+          `https://www.planalto.gov.br/ccivil_03/decreto-lei/del${n}compilado.htm`,
+          `https://www.planalto.gov.br/ccivil_03/decreto-lei/del${n}.htm`,
+        ],
+        paths: [`decreto-lei/del${n}compilado.htm`, `decreto-lei/del${n}.htm`],
+      });
+    }
+  }
+
   // ── Leis Ordinárias ──
   if (args.lawType === 'all' || args.lawType === 'lei') {
     // Pre-2001: prefer compiled version
@@ -122,25 +142,41 @@ function buildCandidates(args: CliArgs): LawCandidate[] {
       }
     }
 
-    // 2003+
+    // 2003+: Each law number gets tried against its year AND adjacent years,
+    // because planalto organizes by enactment year but law numbers don't
+    // align perfectly with year boundaries (e.g., LGPD 13709 enacted 2018
+    // but number falls in what looks like the 2019 range).
     const yearRanges: Array<[number, number, number]> = [
       [10700, 10900, 2003], [10800, 11000, 2004], [11000, 11200, 2005], [11200, 11400, 2006],
       [11300, 11500, 2007], [11500, 11700, 2008], [11700, 12000, 2009], [11900, 12200, 2010],
-      [12200, 12400, 2011], [12400, 12600, 2012], [12600, 12800, 2013], [12800, 13000, 2014],
-      [13000, 13200, 2015], [13100, 13300, 2016], [13300, 13500, 2017], [13400, 13600, 2018],
-      [13600, 13800, 2019], [13800, 14100, 2020], [14000, 14200, 2021], [14200, 14500, 2022],
-      [14400, 14600, 2023], [14600, 14800, 2024], [14800, 15000, 2025], [15000, 15100, 2026],
+      [12200, 12400, 2011], [12400, 12600, 2012], [12600, 12800, 2013], [12800, 13100, 2014],
+      [13000, 13300, 2015], [13100, 13400, 2016], [13300, 13600, 2017], [13400, 13800, 2018],
+      [13600, 14000, 2019], [13800, 14200, 2020], [14000, 14400, 2021], [14200, 14600, 2022],
+      [14400, 14800, 2023], [14600, 15000, 2024], [14800, 15100, 2025], [15000, 15200, 2026],
     ];
+
+    // Deduplicate: track which law numbers we've already generated
+    const seenNumbers = new Set<number>();
 
     for (const [from, to, year] of yearRanges) {
       if (args.fromYear && year < args.fromYear) continue;
-      const bracket = atoBracket(year);
       for (let n = from; n < to; n++) {
-        candidates.push({
-          type: 'lei', number: n, year,
-          urls: [`https://www.planalto.gov.br/ccivil_03/_ato${bracket}/${year}/lei/l${n}.htm`],
-          paths: [`_ato${bracket}/${year}/lei/l${n}.htm`],
-        });
+        if (seenNumbers.has(n)) continue;
+        seenNumbers.add(n);
+
+        // Try the assigned year AND adjacent years (year-1, year+1) because
+        // law numbers don't perfectly align with enactment years on planalto.
+        // E.g., Lei 12.527 (enacted 2011) falls in the 2012 number range.
+        const urls: string[] = [];
+        const paths: string[] = [];
+        for (const tryYear of [year, year - 1, year + 1]) {
+          if (tryYear < 2003) continue;
+          const b = atoBracket(tryYear);
+          urls.push(`https://www.planalto.gov.br/ccivil_03/_ato${b}/${tryYear}/lei/l${n}.htm`);
+          paths.push(`_ato${b}/${tryYear}/lei/l${n}.htm`);
+        }
+
+        candidates.push({ type: 'lei', number: n, year, urls, paths });
       }
     }
   }
@@ -180,7 +216,8 @@ async function processCandidate(c: LawCandidate): Promise<ProcessResult> {
     const result = await tryFetch(c.urls[u]);
     if (!result.ok) continue;
 
-    const title = `${c.type === 'lc' ? 'Lei Complementar' : c.type === 'constituicao' ? 'Constituicao' : 'Lei'} ${c.number}${c.year ? '/' + c.year : ''}`;
+    const typeLabel = c.type === 'lc' ? 'Lei Complementar' : c.type === 'dl' ? 'Decreto-Lei' : c.type === 'constituicao' ? 'Constituicao' : 'Lei';
+    const title = `${typeLabel} ${c.number}${c.year ? '/' + c.year : ''}`;
     const parsed = parsePlanaltoHtml(result.body, c.type, c.number, c.year, title);
     parsed.url = c.urls[u];
     fs.writeFileSync(seedFile, JSON.stringify(parsed, null, 2));
@@ -202,7 +239,7 @@ interface CliArgs {
   limit: number | null;
   skipDiscovery: boolean;
   fromYear: number;
-  lawType: 'all' | 'lei' | 'lc' | 'constituicao';
+  lawType: 'all' | 'lei' | 'lc' | 'dl' | 'constituicao';
 }
 
 function parseArgs(): CliArgs {

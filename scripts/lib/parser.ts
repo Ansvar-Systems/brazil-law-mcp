@@ -122,17 +122,18 @@ export function parsePlanaltoHtml(
       continue;
     }
 
-    // Detect articles: "Art. 1o ..." or "Art. 1. ..."
-    const artMatch = line.match(/^Art\.\s*(\d+)[ºªo°.\s-]*(.*)/i);
+    // Detect articles: "Art. 1o ...", "Art. 1. ...", "Art. 1.000. ..." (thousands separator)
+    const artMatch = line.match(/^Art\.\s*(\d[\d.]*\d|\d+)[ºªo°.\s-]*(.*)/i);
     if (artMatch) {
-      const artNum = stripOrdinal(artMatch[1]);
+      // Strip dot thousands separators (Brazilian convention): "1.000" → "1000"
+      const artNum = stripOrdinal(artMatch[1].replace(/\.(\d{3})/g, '$1'));
       let content = artMatch[2].trim();
 
       // Collect continuation lines (paragraphs, incisos, alineas)
       while (i + 1 < lines.length) {
         const nextLine = lines[i + 1];
         // Stop at next article or chapter
-        if (nextLine.match(/^Art\.\s*\d+/i) || nextLine.match(/^(CAP[IÍ]TULO|T[IÍ]TULO|SE[CÇ][AÃ]O)\s+[IVXLCDM]+/i)) {
+        if (nextLine.match(/^Art\.\s*\d[\d.]*/i) || nextLine.match(/^(CAP[IÍ]TULO|T[IÍ]TULO|SE[CÇ][AÃ]O)\s+[IVXLCDM]+/i)) {
           break;
         }
         content += '\n' + nextLine;
@@ -296,6 +297,10 @@ function buildShortName(title: string, year: number): string {
   if (/10\.?406/i.test(title) && year === 2002) return 'Codigo Civil';
   if (/9\.?472/i.test(title) && year === 1997) return 'LGT';
   if (/constituicao/i.test(title)) return 'CF/88';
+  // Decreto-Lei
+  if (/decreto.*lei.*2\.?848/i.test(title)) return 'Codigo Penal';
+  if (/decreto.*lei.*3\.?689/i.test(title)) return 'CPP';
+  if (/decreto.*lei.*5\.?452/i.test(title)) return 'CLT';
 
   // Abbreviation from title
   const words = title.replace(/[()]/g, '').split(/\s+/);

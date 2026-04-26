@@ -1,0 +1,31 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "eu.ansvar/brazil-law-mcp",
+  "description": "Brazil legislation via MCP — full-text search across statutes and provisions",
+  "repository": {
+    "url": "https://github.com/Ansvar-Systems/brazil-law-mcp",
+    "source": "github"
+  },
+  "homepage": "https://ansvar.eu",
+  "version": "1.0.3",
+  "license": "Apache-2.0",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "@ansvar/brazil-law-mcp",
+      "version": "1.0.3",
+      "transport": {
+        "type": "stdio"
+      }
+    },
+    {
+      "registryType": "npm",
+      "identifier": "@ansvar/brazil-law-mcp",
+      "version": "1.0.3",
+      "transport": {
+        "type": "streamable-http",
+        "url": "https://brazil-law-mcp.vercel.app/mcp"
+      }
+    }
+  ]
+}

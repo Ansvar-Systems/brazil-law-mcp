@@ -11,7 +11,7 @@ sources:
     retrieval_method: "HTML_SCRAPE"
     api_documentation: "N/A"
     update_frequency: "weekly"
-    last_ingested: "PENDING_FIRST_INGEST"
+    last_ingested: "2026-03-30"
     license_or_terms:
       type: "Brazilian Government Public Domain"
       url: "https://www.planalto.gov.br"
@@ -29,7 +29,7 @@ sources:
     retrieval_method: "XML_DOWNLOAD"
     api_documentation: "https://www.lexml.gov.br/docs"
     update_frequency: "weekly"
-    last_ingested: "PENDING_FIRST_INGEST"
+    last_ingested: "2026-03-30"
     license_or_terms:
       type: "Brazilian Government Open Data"
       url: "https://www.lexml.gov.br"
@@ -43,4 +43,4 @@ sources:
 data_freshness:
   automated_checks: true
   check_frequency: "weekly"
-  last_verified: "PENDING_FIRST_INGEST"
+  last_verified: "2026-03-30"

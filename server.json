@@ -24,7 +24,7 @@
       "version": "1.0.3",
       "transport": {
         "type": "streamable-http",
-        "url": "https://brazil-law-mcp.vercel.app/mcp"
+        "url": "https://mcp.ansvar.eu/law-brazil-law-mcp/mcp"
       }
     }
   ]
